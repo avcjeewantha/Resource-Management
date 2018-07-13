@@ -19,16 +19,16 @@ export class BsNavbarComponent implements OnInit {
   }
   navigateToPortal() {
     if (this.authService.currentUser.type === 'admin') {
-      this.router.navigate(['/portal/admin'], { queryParams: { category: 'dashboard' } });
+      this.router.navigate(['/portal/admin'], { queryParams: { category: 'addemployee' } });
     }
     else if (this.authService.currentUser.type === 'resourcemanager') {
-      this.router.navigate(['/portal/resourcemanager'], { queryParams: { category: 'noticeboard' } });
+      this.router.navigate(['/portal/resourcemanager'], { queryParams: { category: 'upcomingprojects' } });
     }
     else if (this.authService.currentUser.type === 'projectmanager') {
       this.router.navigate(['/portal/projectmanager'], { queryParams: { category: 'upcomingprojects' } });
     }
     else if (this.authService.currentUser.type === 'employee') {
-      this.router.navigate(['/portal/employee'], { queryParams: { category: 'noticeboard' } });
+      this.router.navigate(['/portal/employee'], { queryParams: { category: 'assignedprojects' } });
     }
   }
 

@@ -1,3 +1,42 @@
-<p>
-  employeeportal works!
-</p>
+<div class="container pulldown">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group">
+        <a *ngFor='let menuitem of menu' class="list-group-item list-group-item-action" [class.active]='category===menuitem.key'
+          routerLink='/portal/employee' [queryParams]='{category : menuitem.key}'>
+          <h6>{{menuitem.name}}</h6>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+
+      <div *ngIf="category==='assignedprojects'" class="card">
+        <div class="card-header">
+          Assigned Projects
+        </div>
+        <div class="card-body">
+          projects
+        </div>
+      </div>
+
+      <div *ngIf="category==='requestforleave'" class="card">
+        <div class="card-header">
+          Request For Leave
+        </div>
+        <div class="card-body">
+          selected
+        </div>
+      </div>
+
+      <div *ngIf="category==='viewnotice'" class="card">
+        <div class="card-header">
+          View Notice
+        </div>
+        <div class="card-body">
+          leave
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>

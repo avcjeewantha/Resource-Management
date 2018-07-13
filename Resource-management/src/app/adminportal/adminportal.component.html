@@ -1,3 +1,69 @@
-<p>
-  adminportal works!
-</p>
+<div class="container pulldown">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group">
+        <a *ngFor='let menuitem of menu' class="list-group-item list-group-item-action" [class.active]='category===menuitem.key'
+          routerLink='/portal/admin' [queryParams]='{category : menuitem.key}'>
+          <h6>{{menuitem.name}}</h6>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+
+      <div *ngIf="category==='addemployee'" class="card">
+        <div class="card-header">
+          Add Employee
+        </div>
+        <div class="card-body">
+          projects
+        </div>
+      </div>
+
+      <div *ngIf="category==='getemployeedetails'" class="card">
+        <div class="card-header">
+          Get Employee Details
+        </div>
+        <div class="card-body">
+          selected
+        </div>
+      </div>
+
+      <div *ngIf="category==='viewprojects'" class="card">
+        <div class="card-header">
+          View Projects
+        </div>
+        <div class="card-body">
+          leave
+        </div>
+      </div>
+
+      <div *ngIf="category==='leave-projectmanager'" class="card">
+        <div class="card-header">
+          Leave-Project Manager
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+
+      <div *ngIf="category==='leave-resourcemanager'" class="card">
+        <div class="card-header">
+          Leave-Resource Manager
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+
+      <div *ngIf="category==='leave-employees'" class="card">
+        <div class="card-header">
+          Leave-Employees
+        </div>
+        <div class="card-body">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
