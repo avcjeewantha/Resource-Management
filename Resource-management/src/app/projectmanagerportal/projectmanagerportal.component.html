@@ -1,0 +1,78 @@
+<div class="container pulldown">
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group">
+        <a *ngFor='let menuitem of menu' class="list-group-item list-group-item-action" [class.active]='category===menuitem.key'
+          routerLink='/portal/projectmanager' [queryParams]='{category : menuitem.key}'>
+          <h6>{{menuitem.name}}</h6>
+        </a>
+      </div>
+    </div>
+    <div class="col">
+
+      <div *ngIf="category==='upcomingprojects'" class="card">
+        <div class="card-header">
+          Up Coming Projects
+        </div>
+        <div class="card-body">
+            projects
+        </div>
+      </div>
+
+      <div *ngIf="category==='selectedemployees'" class="card">
+        <div class="card-header">
+          Selected Employees
+        </div>
+        <div class="card-body">
+            selected
+        </div>
+      </div>
+      
+      <div *ngIf="category==='requestforleave'" class="card">
+        <div class="card-header">
+          Request For Leave
+        </div>
+        <div class="card-body">
+            leave
+        </div>
+      </div>
+
+      <div *ngIf="category==='getemployeedetails'" class="card">
+        <div class="card-header">
+          Get Employee Details
+        </div>
+        <div class="card-body">
+      
+        </div>
+      </div>
+
+      <div *ngIf="category==='addanotice'" class="card">
+        <div class="card-header">
+          Add a Notice
+        </div>
+        <div class="card-body">
+      
+        </div>
+      </div>
+
+      <div *ngIf="category==='viewinquiries'" class="card">
+        <div class="card-header">
+          View Inquiries
+        </div>
+        <div class="card-body">
+      
+        </div>
+      </div>
+
+      <div *ngIf="category==='inquiries'" class="card">
+        <div class="card-header">
+          Inquiries
+        </div>
+        <div class="card-body">
+      
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
