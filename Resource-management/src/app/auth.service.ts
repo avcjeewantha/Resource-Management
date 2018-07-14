@@ -30,7 +30,9 @@ export class AuthService {
   }
 
   get currentUsername() {
-    let token = localStorage.getItem('token')
+    let token = localStorage.getItem('token');
+    //console.log("chamoda");
+    //console.log(token);
     if (!token) {
       return null;
     }
@@ -38,6 +40,42 @@ export class AuthService {
       let jwthelper = new JwtHelper();
       let name = jwthelper.decodeToken(token).payload.firstname.concat(' ').concat(jwthelper.decodeToken(token).payload.lastname);
       return name;
+    }
+  }
+
+  get currentUserId() {
+    let token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+    else {
+      let jwthelper = new JwtHelper();
+      let id = jwthelper.decodeToken(token).payload.id;
+      return id;
+    }
+  }
+
+  get currentUserfname() {
+    let token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+    else {
+      let jwthelper = new JwtHelper();
+      let firstname = jwthelper.decodeToken(token).payload.firstname;
+      return firstname;
+    }
+  }
+
+  get currentUserlname() {
+    let token = localStorage.getItem('token');
+    if (!token) {
+      return null;
+    }
+    else {
+      let jwthelper = new JwtHelper();
+      let lastname = jwthelper.decodeToken(token).payload.lastname;
+      return lastname;
     }
   }
 

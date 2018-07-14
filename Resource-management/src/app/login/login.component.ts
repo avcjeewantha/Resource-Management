@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         let returnUrl = this.route.snapshot.queryParamMap.get("returnUrl");
         let action = this.route.snapshot.queryParamMap.get("action");
         let uri_dec = decodeURIComponent(returnUrl);
-        console.log(uri_dec);
+        //console.log(uri_dec);
         if (returnUrl) {
           this.router.navigateByUrl(uri_dec);
         }
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
         this.message = 'Invalid email or password';
       }
     });
-    console.log(credentials);
+    //console.log(credentials);
   }
 
 

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from './../auth.service';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-resourcemanagerportal',
@@ -12,14 +15,15 @@ export class ResourcemanagerportalComponent implements OnInit {
   category: string;
   success = false;
   form: NgForm;
+  leaveSuccess = false;
+  reason: string;
+  startDate;
+  endDate;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
     });
-    //this.dataService.getNotices().subscribe(response => {
-    //this.notices = response;
-    //});
   }
 
   ngOnInit() {
@@ -33,14 +37,23 @@ export class ResourcemanagerportalComponent implements OnInit {
     { name: 'Inquiries', key: 'inquiries' }
   ];
 
-
-  // newInquiry(Inquiry) {
-  //  let response = this.dataService.newInquiry(Inquiry);
-  //  if (response) {
-  //   this.success = true;
-  //   setTimeout(() => this.success = false, 3000);
-  //  this.subject = "";
-  //  this.inquiry = "";
-  //  }
-  // }
+  rsmanagersendLeaveApplication(details) {
+    let startdate = this.dateparser.format(this.startDate);
+    let enddate = this.dateparser.format(this.endDate);
+    //console.log(enddate);
+    let data = {
+      rsmanagerId: this.authService.currentUserId,
+      reason: details.reason,
+      firstname: this.authService.currentUserfname,
+      lastname: this.authService.currentUserlname,
+      startdate: startdate,
+      enddate: enddate,
+    }
+    //console.log(this.authService.currentUserId);
+    let response = this.dataService.rsmanagersendLeaveApplication(data);
+    if (response) {
+      this.leaveSuccess = true;
+      setTimeout(() => this.leaveSuccess = false, 3000);
+    }
+  }
 }

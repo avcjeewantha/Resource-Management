@@ -16,7 +16,7 @@ users.post('/login', function(req, res) {
     var appData = {};
     var input = { 'email' : req.body.email, 'password' : req.body.password}
 
-    console.log(input);
+    //console.log(input);
 
     database.connection.getConnection(function(err, connection) {
         if (err) {
@@ -25,7 +25,7 @@ users.post('/login', function(req, res) {
             console.log(err);
             res.status(200).json(appData);
         } else {
-            connection.query("SELECT firstname, lastname, address, type, CAST(AES_DECRYPT(password,'rahul123') AS CHAR(50)) password FROM users WHERE email = ?", input.email, function(err, rows, fields) {
+            connection.query("SELECT id,firstname, lastname, address, type, CAST(AES_DECRYPT(password,'rahul123') AS CHAR(50)) password FROM users WHERE email = ?", input.email, function(err, rows, fields) {
                 if (err) {
                     appData.error = 1;
                     appData["data"] = "Error Occured!";
@@ -34,12 +34,13 @@ users.post('/login', function(req, res) {
                     
                     if (rows.length = 1) {
                         if (rows[0]){
-                            console.log(rows);
+                            //console.log(rows[0]);
                             if (rows[0].password == input.password) {
                                 var data = JSON.stringify(rows[0]);
-                                let token = jwt.sign({payload :{'firstname':rows[0].firstname,'lastname' : rows[0].lastname, 'address': rows[0].Address,'email': rows[0].email,'type':rows[0].type}}, process.env.SECRET_KEY, {
+                                let token = jwt.sign({ payload: { 'id': rows[0].id,'firstname':rows[0].firstname,'lastname' : rows[0].lastname, 'address': rows[0].Address,'email': rows[0].email,'type':rows[0].type}}, process.env.SECRET_KEY, {
                                     expiresIn: 1440
                                 });
+                                //console.log(token);
                                 appData.error = 0;
                                 appData["token"] = token;
                                 res.status(200).json(appData);
