@@ -32,33 +32,46 @@
               <label for="reason">
                 <b>Reason</b>
               </label>
-              <textarea ngModel #reason="ngModel" name="reason" class="form-control" id="reason" rows="3" placeholder="Enter the Reason"
-                value="this.reason"></textarea>
-            </div>
-            <div class="alert-danger" *ngIf="reason.touched && !reason.valid "> your reason is empty</div>
-            <div>
-              <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
-                      Starting date
-                      <img src="/assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                    </button>
-                  </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="startDate" ngbDatepicker #d1="ngbDatepicker">
-                </div>
+              <textarea required ngModel #reason="ngModel" name="reason" class="form-control" id="reason" rows="3" placeholder="Enter the Reason"
+                value="this.reason">
+                    </textarea>
+              <div class="alert alert-danger" *ngIf="reason.touched && !reason.valid">
+                Your Reason is required
               </div>
             </div>
-            <div>
-              <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
-                      Ending Date
-                      <img src="/assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
-                    </button>
+            <!--<div class="alert-danger" *ngIf="reason.touched && !reason.valid "> your reason is empty</div>-->
+            <div class="raw ">
+              <div>
+                <div class="col-sm-4 form-group">
+                  <div class="input-group">
+                    <input required class="form-control" placeholder="yyyy-mm-dd" name="sdate" #sdate="ngModel" [(ngModel)]="startdate" ngbDatepicker
+                      #d1="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                        <img src="/assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                      </button>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="sdate.touched && !sdate.valid">
+                      Start Date is required
+                    </div>
                   </div>
-                  <input class="form-control" placeholder="yyyy-mm-dd" name="dp" [(ngModel)]="endDate" ngbDatepicker #d2="ngbDatepicker">
+                </div>
+              </div>
+      
+              <div>
+                <div class="col-sm-4 form-group">
+                  <div class="input-group">
+                    <input required class="form-control" placeholder="yyyy-mm-dd" name="edate" #edate="ngModel" [(ngModel)]="enddate" ngbDatepicker
+                      #d2="ngbDatepicker">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                        <img src="/assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                      </button>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="edate.touched && !edate.valid">
+                      End Date is required
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

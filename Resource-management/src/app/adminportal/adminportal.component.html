@@ -15,7 +15,169 @@
           Add Employee
         </div>
         <div class="card-body">
-          projects
+          <div *ngIf="addSuccess" class="alert alert-success" role="alert">
+            This application has been submitted.
+          </div>
+          <div class="col-lg-12 well">
+            <div class="row">
+              <form #fm="ngForm" (ngSubmit)="register(fm.value)">
+                <div class="col-sm-12">
+                  <div class="row">
+                    <div class="col-sm-6 form-group">
+                      <label>Employee's First Name</label>
+                      <input required ngModel pattern="[A-Za-z]+" name='fn' #fn="ngModel" type="text" placeholder="Enter First Name Here.." class="form-control">
+                      <div *ngIf="fn.touched && !fn.valid">
+                        <div class="alert alert-danger" *ngIf="fn.errors.required">
+                          First Name is required
+                        </div>
+                        <div class="alert alert-danger" *ngIf="fn.errors.pattern">
+                          First Name is invalid
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                      <label>Employee's Last Name</label>
+                      <input required ngModel pattern="[A-Za-z]+" name='ln' #ln="ngModel" type="text" placeholder="Enter Last Name Here.." class="form-control">
+                      <div *ngIf="ln.touched && !ln.valid">
+                        <div class="alert alert-danger" *ngIf="ln.errors.required">
+                          Last Name is required
+                        </div>
+                        <div class="alert alert-danger" *ngIf="ln.errors.pattern">
+                          Last Name is invalid
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Address</label>
+                    <textarea required ngModel name='address' #address="ngModel" placeholder="Enter Address Here.." rows="3" class="form-control"></textarea>
+                    <div class="alert alert-danger" *ngIf="address.touched && !address.valid">
+                      Address is required
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4 form-group">
+                      <label>City</label>
+                      <input required ngModel name='city' #city="ngModel" type="text" placeholder="Enter City Name Here.." class="form-control">
+                      <div class="alert alert-danger" *ngIf="city.touched && !city.valid">
+                        City is required
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4 form-group">
+                      <label>Start Date</label>
+
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input required class="form-control" placeholder="yyyy-mm-dd" name="sdate" #sdate="ngModel" [(ngModel)]="startdate" ngbDatepicker
+                            #d1="ngbDatepicker">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                              <img src="/assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                            </button>
+                          </div>
+                          <div class="alert alert-danger" *ngIf="sdate.touched && !sdate.valid">
+                            Start Date is required
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-sm-4 form-group">
+                      <label>Date of Birthday</label>
+
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input required class="form-control" placeholder="yyyy-mm-dd" name="dob" #dob="ngModel" [(ngModel)]="birthday" ngbDatepicker
+                            #d2="ngbDatepicker">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                              <img src="/assets/date.png" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+                            </button>
+                          </div>
+                          <div class="alert alert-danger" *ngIf="dob.touched && !dob.valid">
+                            Birthday is required
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Phone Number</label>
+                    <input required minlength="10" pattern="[0-9]{9}" ngModel name='phnnum' #phnnum="ngModel" type="number" placeholder="Enter Phone Number Here.."
+                      class="form-control">
+                    <div *ngIf="phnnum.touched && !phnnum.valid">
+                      <div class="alert alert-danger" *ngIf="phnnum.errors.required">
+                        Phone number is required
+                      </div>
+                      <div class="alert alert-danger" *ngIf="phnnum.errors.pattern">
+                        Phone number is invalid
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Email Address</label>
+                    <input required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ngModel name='email' #email="ngModel" type="email" placeholder="Enter Email Address Here.."
+                      class="form-control">
+                    <div *ngIf="email.touched && !email.valid">
+                      <div class="alert alert-danger" *ngIf="email.errors.required">
+                        Email is required
+                      </div>
+                      <div class="alert alert-danger" *ngIf="email.errors.pattern">
+                        Email is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    Add skills here (Please fill with Yes/No)
+                    <div class="raw">
+                      
+                      <div class="col-sm-3 form-group">
+                        <label>Java</label>
+                        <input required ngModel name='java' #java="ngModel" type="text" placeholder="Enter yes/no Here.." class="form-control">
+                        <div *ngIf="java.touched && !java.valid">
+                          <div class="alert alert-danger" *ngIf="java.errors.required">
+                            Answer is required(Yes/No) 
+                          </div>                         
+                        </div>
+                      </div>
+
+                      <div class="col-sm-3 form-group">
+                        <label>Angular</label>
+                        <input required ngModel name='angular' #angular="ngModel" type="text" placeholder="Enter yes/no Here.." class="form-control">
+                        <div *ngIf="angular.touched && !angular.valid">
+                          <div class="alert alert-danger" *ngIf="angular.errors.required">
+                            Answer is required(Yes/No)
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-sm-3 form-group">
+                        <label>Nodejs</label>
+                        <input required ngModel name='nodejs' #nodejs="ngModel" type="text" placeholder="Enter yes/no Here.." class="form-control">
+                        <div *ngIf="nodejs.touched && !nodejs.valid">
+                          <div class="alert alert-danger" *ngIf="nodejs.errors.required">
+                            Answer is required(Yes/No)
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>  
+                    <button type="submit" class="btn btn-primary" [disabled]="!fm.valid">Submit</button>
+                  
+                </div>
+
+                <p>
+                  <!--{{ fm.value | json }}-->
+                </p>
+
+              </form>
+            </div>
+          </div>
         </div>
       </div>
 

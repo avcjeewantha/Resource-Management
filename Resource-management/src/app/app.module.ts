@@ -12,10 +12,10 @@ import { AdminportalComponent } from './adminportal/adminportal.component';
 import { ResourcemanagerportalComponent } from './resourcemanagerportal/resourcemanagerportal.component';
 import { ProjectmanagerportalComponent } from './projectmanagerportal/projectmanagerportal.component';
 import { EmployeeportalComponent } from './employeeportal/employeeportal.component';
-import { ProjectmanagerAuthGuard } from './projectmanager-auth-guard.service';
-import { ResourcemanagerAuthGuard } from './resourcemanager-auth-guard.service';
-import { EmployeeAuthGuard } from './employee-auth-guard.service';
-import { AdminAuthGuard } from './admin-auth-guard.service';
+import { ProjectmanagerAuthGuardService } from './projectmanager-auth-guard.service';
+import { ResourcemanagerAuthGuardService } from './resourcemanager-auth-guard.service';
+import { EmployeeAuthGuardService } from './employee-auth-guard.service';
+import { AdminAuthGuardService } from './admin-auth-guard.service';
 import { AuthGuard } from './auth-guard.service';
 import { DataService } from './data.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -46,10 +46,10 @@ import { FormsModule } from '@angular/forms';
       { path: 'login', component: LoginComponent },
       { path: 'about', component: AboutComponent },
       { path: 'careers', component: CareersComponent },
-      { path: 'portal/admin', component: AdminportalComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-      { path: 'portal/resourcemanager', component: ResourcemanagerportalComponent, canActivate: [AuthGuard, ResourcemanagerAuthGuard] },
-      { path: 'portal/projectmanager', component: ProjectmanagerportalComponent, canActivate: [AuthGuard, ProjectmanagerAuthGuard] },
-      { path: 'portal/employee', component: EmployeeportalComponent, canActivate: [AuthGuard, EmployeeAuthGuard] },
+      { path: 'portal/admin', component: AdminportalComponent, canActivate: [AuthGuard, AdminAuthGuardService] },
+      { path: 'portal/resourcemanager', component: ResourcemanagerportalComponent, canActivate: [AuthGuard, ResourcemanagerAuthGuardService] },
+      { path: 'portal/projectmanager', component: ProjectmanagerportalComponent, canActivate: [AuthGuard, ProjectmanagerAuthGuardService] },
+      { path: 'portal/employee', component: EmployeeportalComponent, canActivate: [AuthGuard, EmployeeAuthGuardService] },
       { path: 'accessdenied', component: AccessdeniedComponent }]),
 
     NgbModule.forRoot(),
@@ -60,10 +60,10 @@ import { FormsModule } from '@angular/forms';
     AuthService,
     DataService,
     AuthGuard,
-    AdminAuthGuard,
-    ResourcemanagerAuthGuard,
-    ProjectmanagerAuthGuard,
-    EmployeeAuthGuard
+    AdminAuthGuardService,
+    ResourcemanagerAuthGuardService,
+    ProjectmanagerAuthGuardService,
+    EmployeeAuthGuardService
   ],
   bootstrap: [AppComponent]
 })

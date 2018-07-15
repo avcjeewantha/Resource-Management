@@ -17,8 +17,6 @@ export class EmployeeportalComponent implements OnInit {
   form: NgForm;
   leaveSuccess = false;
   reason: string;
-  startDate;
-  endDate;
 
   constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -36,8 +34,8 @@ export class EmployeeportalComponent implements OnInit {
   ];
 
   empsendLeaveApplication(details) {
-    let startdate = this.dateparser.format(this.startDate);
-    let enddate = this.dateparser.format(this.endDate);
+    let startdate = this.dateparser.format(details.sdate);
+    let enddate = this.dateparser.format(details.edate);
     //console.log(enddate);
     let data = {
       employeeId: this.authService.currentUserId,

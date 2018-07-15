@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../data.service';
 import { NgForm } from '@angular/forms';
+import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from './../auth.service';
+import { LowerCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-adminportal',
@@ -10,16 +13,13 @@ import { NgForm } from '@angular/forms';
 })
 export class AdminportalComponent implements OnInit {
   category: string;
-  success = false;
+  addSuccess = false;
   form: NgForm;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService) {
+  constructor(private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private dateparser: NgbDateParserFormatter) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
     });
-    //this.dataService.getNotices().subscribe(response => {
-    //this.notices = response;
-    //});
   }
 
   ngOnInit() {
@@ -34,14 +34,41 @@ export class AdminportalComponent implements OnInit {
     { name: 'Leave-Employees', key: 'leave-employees' }
   ];
 
+  register(details) {
+    let dob = this.dateparser.format(details.dob);
+    let sdate = this.dateparser.format(details.sdate);
+    let java ="No";
+    let angular ="No";
+    let nodejs = "No";
+    if ((details.java == 'yes') || (details.java == 'Yes') || (details.java == 'YES')){
+      java = 'Yes';
+    }
+    if ((details.angular == 'yes') || (details.angular == 'Yes') || (details.angular == 'YES')) {
+      angular = 'Yes';
+    }
+    if ((details.nodejs == 'yes') || (details.nodejs == 'Yes') || (details.nodejs == 'YES')) {
+      nodejs = 'Yes';
+    }
+    let registerDetails = {
+      firstname: details.fn,
+      lastname: details.ln,
+      address: details.address,
+      city: details.city,
+      sdate: sdate,
+      birthday: dob,
+      phnnum: details.phnnum,
+      email: details.email,
+      java: java,
+      angular: angular,
+      nodejs: nodejs
+    };
+    //console.log(registerDetails);
+    let response = this.dataService.addEmployee(registerDetails);
+    if (response) {
+      this.addSuccess = true;
+      setTimeout(() => this.addSuccess = false, 3000);
+    }
+  }
 
-  // newInquiry(Inquiry) {
-  //  let response = this.dataService.newInquiry(Inquiry);
-  //  if (response) {
-  //   this.success = true;
-  //   setTimeout(() => this.success = false, 3000);
-  //  this.subject = "";
-  //  this.inquiry = "";
-  //  }
-  // }
+  
 }

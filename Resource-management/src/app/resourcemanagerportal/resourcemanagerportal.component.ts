@@ -17,8 +17,6 @@ export class ResourcemanagerportalComponent implements OnInit {
   form: NgForm;
   leaveSuccess = false;
   reason: string;
-  startDate;
-  endDate;
 
   constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -38,8 +36,8 @@ export class ResourcemanagerportalComponent implements OnInit {
   ];
 
   rsmanagersendLeaveApplication(details) {
-    let startdate = this.dateparser.format(this.startDate);
-    let enddate = this.dateparser.format(this.endDate);
+    let startdate = this.dateparser.format(details.sdate);
+    let enddate = this.dateparser.format(details.edate);
     //console.log(enddate);
     let data = {
       rsmanagerId: this.authService.currentUserId,
@@ -49,6 +47,7 @@ export class ResourcemanagerportalComponent implements OnInit {
       startdate: startdate,
       enddate: enddate,
     }
+    //console.log(data);
     //console.log(this.authService.currentUserId);
     let response = this.dataService.rsmanagersendLeaveApplication(data);
     if (response) {

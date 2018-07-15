@@ -20,8 +20,15 @@ export class DataService {
     });
   }
   rsmanagersendLeaveApplication(details) {
+    //console.log(details);
     return this.http.post("http://localhost:3000/api/rsmanagerstoreLeaveData", details).subscribe(response => {
       return response.json();
     });
   }
+  addEmployee(details) {
+    return this.http.post("http://localhost:3000/api/storeEmployee", details).subscribe(response => {
+      return response.json();
+    });
+  }
+  
 }
