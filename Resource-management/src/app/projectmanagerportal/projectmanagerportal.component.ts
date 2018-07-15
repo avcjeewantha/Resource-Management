@@ -17,6 +17,7 @@ export class ProjectmanagerportalComponent implements OnInit {
   form: NgForm;
   leaveSuccess = false;
   reason: string;
+  addSuccess = false;
 
   constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -54,6 +55,40 @@ export class ProjectmanagerportalComponent implements OnInit {
     if (response) {
       this.leaveSuccess = true;
       setTimeout(() => this.leaveSuccess = false, 3000);
+    }
+  }
+
+  propose(details) {
+    let sdate = this.dateparser.format(details.sdate);
+    let edate = this.dateparser.format(details.edate); 
+    let java = "No";
+    let angular = "No";
+    let nodejs = "No";
+    if ((details.java == 'yes') || (details.java == 'Yes') || (details.java == 'YES')) {
+      java = 'Yes';
+    }
+    if ((details.angular == 'yes') || (details.angular == 'Yes') || (details.angular == 'YES')) {
+      angular = 'Yes';
+    }
+    if ((details.nodejs == 'yes') || (details.nodejs == 'Yes') || (details.nodejs == 'YES')) {
+      nodejs = 'Yes';
+    }
+    let projectDetails = {
+      projectid: details.projectid,
+      projectname: details.projectname,
+      numofemployees: details.numofemployees,
+      budget: details.budget,
+      sdate: sdate,
+      edate: edate,
+      java: java,
+      angular: angular,
+      nodejs: nodejs
+    };
+    //console.log(projectDetails);
+    let response = this.dataService.addProject(projectDetails);
+    if (response) {
+      this.addSuccess = true;
+      setTimeout(() => this.addSuccess = false, 3000);
     }
   }
 }

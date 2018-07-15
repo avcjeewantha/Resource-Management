@@ -31,4 +31,9 @@ export class DataService {
     });
   }
   
+  addProject(details) {
+    return this.http.post("http://localhost:3000/api/storeProject", details).subscribe(response => {
+      return response.json();
+    });
+  }
 }

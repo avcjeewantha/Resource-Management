@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2018 at 08:26 AM
+-- Generation Time: Jul 15, 2018 at 01:43 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -65,6 +65,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `java` varchar(8) NOT NULL,
   `angular` varchar(8) NOT NULL,
   `nodejs` varchar(8) NOT NULL,
+  `assignedprojects` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
@@ -72,12 +73,12 @@ CREATE TABLE IF NOT EXISTS `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdate`, `birthday`, `phnnum`, `email`, `java`, `angular`, `nodejs`) VALUES
-(1, '', '', '', '', '', '', '', '', '', '', ''),
-(2, '', '', '', '', '', '', '', '', '', '', ''),
-(3, '', '', '', '', '', '', '', '', '', '', ''),
-(4, 'Employee', 'Employee', '', '', '', '', '', 'employee@gmail.com', '', '', ''),
-(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes');
+INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdate`, `birthday`, `phnnum`, `email`, `java`, `angular`, `nodejs`, `assignedprojects`) VALUES
+(1, '', '', '', '', '', '', '', '', '', '', '', ''),
+(2, '', '', '', '', '', '', '', '', '', '', '', ''),
+(3, '', '', '', '', '', '', '', '', '', '', '', ''),
+(4, 'Employee', 'Employee', '', '', '', '', '', 'employee@gmail.com', '', '', '', ''),
+(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', '');
 
 -- --------------------------------------------------------
 
@@ -103,6 +104,34 @@ INSERT INTO `projectmanagerleaves` (`id`, `firstname`, `lastname`, `reason`, `st
 (2, 'Project', 'Manager', 'fefgref', '2018-07-10', '2018-07-05', ''),
 (2, 'Project', 'Manager', 'sfrgfefr', '2018-07-10', '2018-07-05', ''),
 (2, 'Project', 'Manager', 'efrerfer', '2018-07-18', '2018-07-27', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE IF NOT EXISTS `projects` (
+  `id` int(11) NOT NULL,
+  `projectname` varchar(200) NOT NULL,
+  `numofemployees` int(20) NOT NULL,
+  `budget` text NOT NULL,
+  `sdate` varchar(20) NOT NULL,
+  `edate` varchar(20) NOT NULL,
+  `java` varchar(5) NOT NULL,
+  `angular` varchar(5) NOT NULL,
+  `nodejs` varchar(5) NOT NULL,
+  `assignedemployees` varchar(30) NOT NULL,
+  `assigned` varchar(5) NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `projects`
+--
+
+INSERT INTO `projects` (`id`, `projectname`, `numofemployees`, `budget`, `sdate`, `edate`, `java`, `angular`, `nodejs`, `assignedemployees`, `assigned`) VALUES
+(1, 'test', 2, '1456', '2018-07-03', '2018-07-27', 'Yes', 'No', 'Yes', '', 'No');
 
 -- --------------------------------------------------------
 

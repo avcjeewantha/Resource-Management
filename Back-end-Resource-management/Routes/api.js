@@ -131,7 +131,7 @@ api.post('/storeEmployee', (req, res) => {
     var angular = req.body.angular;
     var nodejs = req.body.nodejs;
     var employeeData = { firstname: firstname, lastname: lastname, address: address, city: city, sdate: sdate, birthday: birthday, phnnum: phnnum, email: email, java: java, angular: angular, nodejs: nodejs };
-    console.log(employeeData);
+    //console.log(employeeData);
     var appData = {
         "error": 1,
         "data": ""
@@ -144,7 +144,49 @@ api.post('/storeEmployee', (req, res) => {
             //console.log('here we have erroe');
         } else {
             //console.log(prmanagerData);
-            connection.query('INSERT INTO employees VALUES("",?,?,?,?,?,?,?,?,?,?,?); INSERT INTO users VALUES("",?,?,?,?,AES_ENCRYPT("123","rahul123"),"employee")', [employeeData.firstname, employeeData.lastname, employeeData.address, employeeData.city, employeeData.sdate, employeeData.birthday, employeeData.phnnum, employeeData.email, employeeData.java, employeeData.angular, employeeData.nodejs, employeeData.firstname, employeeData.lastname, employeeData.address, employeeData.email ], function (err, rows, fields) {
+            connection.query('INSERT INTO employees VALUES("",?,?,?,?,?,?,?,?,?,?,?,""); INSERT INTO users VALUES("",?,?,?,?,AES_ENCRYPT("123","rahul123"),"employee")', [employeeData.firstname, employeeData.lastname, employeeData.address, employeeData.city, employeeData.sdate, employeeData.birthday, employeeData.phnnum, employeeData.email, employeeData.java, employeeData.angular, employeeData.nodejs, employeeData.firstname, employeeData.lastname, employeeData.address, employeeData.email ], function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "data entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                    //console.log(err);
+                }
+            });
+            connection.release();
+        }
+    });
+
+});
+
+api.post('/storeProject', (req, res) => {
+    //console.log(req.body);
+    var projectid = req.body.projectid;
+    var projectname = req.body.projectname;
+    var numofemployees = req.body.numofemployees;
+    var budget = req.body.budget;
+    var sdate = req.body.sdate;
+    var edate = req.body.edate;
+    var java = req.body.java;
+    var angular = req.body.angular;
+    var nodejs = req.body.nodejs;
+    var projectData = { projectid: projectid, projectname: projectname, numofemployees: numofemployees, budget: budget, sdate: sdate, edate: edate, java: java, angular: angular, nodejs: nodejs };
+    //console.log(projectData);
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+            //console.log('here we have erroe');
+        } else {
+            //console.log(prmanagerData);
+            connection.query('INSERT INTO projects VALUES(?,?,?,?,?,?,?,?,?,"","No")', [projectData.projectid, projectData.projectname, projectData.numofemployees, projectData.budget, projectData.sdate, projectData.edate, projectData.java, projectData.angular, projectData.nodejs], function (err, rows, fields) {
                 if (!err) {
                     appData.error = 0;
                     appData["data"] = "data entered successfully!";
