@@ -20,7 +20,7 @@
           </div>
           <div class="col-lg-12 well">
             <div class="row">
-              <form #fm="ngForm" (ngSubmit)="register(fm.value)">
+              <form #fm="ngForm" (ngSubmit)="register(fm.value);fm.reset()">
                 <div class="col-sm-12">
                   <div class="row">
                     <div class="col-sm-6 form-group">

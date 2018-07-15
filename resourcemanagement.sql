@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2018 at 07:49 AM
+-- Generation Time: Jul 15, 2018 at 08:26 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `angular` varchar(8) NOT NULL,
   `nodejs` varchar(8) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `employees`
@@ -77,7 +77,7 @@ INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdat
 (2, '', '', '', '', '', '', '', '', '', '', ''),
 (3, '', '', '', '', '', '', '', '', '', '', ''),
 (4, 'Employee', 'Employee', '', '', '', '', '', 'employee@gmail.com', '', '', ''),
-(6, 'kamal', 'saman', 'galle', 'weligama', '2018-07-03', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'No', 'Yes', 'Yes');
+(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes');
 
 -- --------------------------------------------------------
 
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(20) NOT NULL,
   `type` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `users`
@@ -153,7 +153,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `address`, `email`, `passwor
 (2, 'Project', 'Manager', '', 'projectmanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'projectmanager'),
 (3, 'Resource', 'Manager', '', 'resourcemanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'resourcemanager'),
 (4, 'Employee', 'Employee', '', 'employee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(5, 'kamal', 'saman', 'galle', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
+(10, 'kamal', 'saman', 'matara', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
