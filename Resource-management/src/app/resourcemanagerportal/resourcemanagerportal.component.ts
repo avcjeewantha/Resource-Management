@@ -121,4 +121,5 @@ export class ResourcemanagerportalComponent implements OnInit {
       this.inquiry = "";
     }
   }
+  
 }

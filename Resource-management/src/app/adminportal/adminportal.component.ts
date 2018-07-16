@@ -4,7 +4,7 @@ import { DataService } from '../data.service';
 import { NgForm } from '@angular/forms';
 import { NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './../auth.service';
-import { LowerCasePipe } from '@angular/common';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-adminportal',
@@ -16,8 +16,9 @@ export class AdminportalComponent implements OnInit {
   addSuccess = false;
   form: NgForm;
   viewinquiries = [];
+  closeResult: string;
 
-  constructor(private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private dateparser: NgbDateParserFormatter) {
+  constructor(private modalService: NgbModal,private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private dateparser: NgbDateParserFormatter) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
     });
@@ -28,6 +29,9 @@ export class AdminportalComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  clickedApp: boolean;
+  leaveApplications: any;
 
   menu = [
     { name: 'Add Employee', key: 'addemployee' },
@@ -75,5 +79,69 @@ export class AdminportalComponent implements OnInit {
     }
   }
 
-  
+  getLeaveApplications_pm() {
+    this.dataService.getLeaveApp_pm().subscribe((response) => {
+      this.leaveApplications = (response);
+    });
+  }
+
+  setLeave_pm(leaveid: number, result: boolean) {
+    //console.log(leaveid);
+    var decision = 'disapproved';
+    if (result) { decision = 'approved'; }
+    this.dataService.setLeave_pm(leaveid, decision);
+    this.dataService.deleteLeaveAppliccation_pm(leaveid);
+    var index = this.leaveApplications.indexOf(this.leaveApplications.leaveid = leaveid);
+    this.leaveApplications.splice(index + 1, 1);
+  }
+  //method for the popup menu
+  open(content) {
+    this.modalService.open(content, {}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  //method for the popup menu
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  getLeaveApplications_rm() {
+    this.dataService.getLeaveApp_rm().subscribe((response) => {
+      this.leaveApplications = (response);
+    });
+  }
+
+  setLeave_rm(leaveid: number, result: boolean) {
+    //console.log(leaveid);
+    var decision = 'disapproved';
+    if (result) { decision = 'approved'; }
+    this.dataService.setLeave_rm(leaveid, decision);
+    this.dataService.deleteLeaveAppliccation_rm(leaveid);
+    var index = this.leaveApplications.indexOf(this.leaveApplications.leaveid = leaveid);
+    this.leaveApplications.splice(index + 1, 1);
+  }
+
+  getLeaveApplications_em() {
+    this.dataService.getLeaveApp_em().subscribe((response) => {
+      this.leaveApplications = (response);
+    });
+  }
+
+  setLeave_em(leaveid: number, result: boolean) {
+    //console.log(leaveid);
+    var decision = 'disapproved';
+    if (result) { decision = 'approved'; }
+    this.dataService.setLeave_em(leaveid, decision);
+    this.dataService.deleteLeaveAppliccation_em(leaveid);
+    var index = this.leaveApplications.indexOf(this.leaveApplications.leaveid = leaveid);
+    this.leaveApplications.splice(index + 1, 1);
+  }
 }

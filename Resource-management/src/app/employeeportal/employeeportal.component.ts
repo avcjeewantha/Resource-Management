@@ -56,4 +56,5 @@ export class EmployeeportalComponent implements OnInit {
       setTimeout(() => this.leaveSuccess = false, 3000);
     }
   }
+
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2018 at 08:02 AM
+-- Generation Time: Jul 16, 2018 at 10:46 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -29,22 +29,25 @@ USE `resourcemanagement`;
 --
 
 CREATE TABLE IF NOT EXISTS `employeeleaves` (
+  `leaveid` int(11) NOT NULL AUTO_INCREMENT,
   `id` int(20) NOT NULL,
   `firstname` varchar(60) NOT NULL,
   `lastname` varchar(60) NOT NULL,
   `reason` text NOT NULL,
   `startdate` varchar(20) NOT NULL,
   `enddate` varchar(20) NOT NULL,
-  `leavestatus` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `leavestatus` varchar(10) NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`leaveid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `employeeleaves`
 --
 
-INSERT INTO `employeeleaves` (`id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
-(4, 'Employee', 'Employee', 'referfrer', '2018-07-10', '2018-07-05', ''),
-(4, 'Employee', 'Employee', 'erfer', '2018-07-10', '2018-07-05', '');
+INSERT INTO `employeeleaves` (`leaveid`, `id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
+(1, 4, 'Employee', 'Employee', 'vdfvfvf', '2018-07-18', '2018-07-05', 'approved'),
+(2, 4, 'Employee', 'Employee', 'cdsdcscsdc', '2018-07-10', '2018-07-27', 'disapprove'),
+(3, 4, 'Employee', 'Employee', 'sdvsvsdv', '2018-07-10', '2018-07-27', 'No');
 
 -- --------------------------------------------------------
 
@@ -132,23 +135,25 @@ INSERT INTO `prmanagernotices` (`title`, `description`, `expiredate`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `projectmanagerleaves` (
+  `leaveid` int(11) NOT NULL AUTO_INCREMENT,
   `id` int(20) NOT NULL,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(100) NOT NULL,
   `reason` text NOT NULL,
   `startdate` varchar(20) NOT NULL,
   `enddate` varchar(20) NOT NULL,
-  `leavestatus` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `leavestatus` varchar(10) NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`leaveid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `projectmanagerleaves`
 --
 
-INSERT INTO `projectmanagerleaves` (`id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
-(2, 'Project', 'Manager', 'fefgref', '2018-07-10', '2018-07-05', ''),
-(2, 'Project', 'Manager', 'sfrgfefr', '2018-07-10', '2018-07-05', ''),
-(2, 'Project', 'Manager', 'efrerfer', '2018-07-18', '2018-07-27', '');
+INSERT INTO `projectmanagerleaves` (`leaveid`, `id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
+(1, 2, 'Project', 'Manager', 'svfdvcdsv', '2018-07-03', '2018-07-05', 'disapprove'),
+(2, 2, 'Project', 'Manager', 'cdcwcw', '2018-07-10', '2018-07-27', 'disapprove'),
+(3, 2, 'Project', 'Manager', 'wecwecwe', '2018-07-10', '2018-07-27', 'approved');
 
 -- --------------------------------------------------------
 
@@ -185,21 +190,25 @@ INSERT INTO `projects` (`id`, `projectname`, `numofemployees`, `budget`, `sdate`
 --
 
 CREATE TABLE IF NOT EXISTS `resourcemanagerleaves` (
+  `leaveid` int(11) NOT NULL AUTO_INCREMENT,
   `id` int(20) NOT NULL,
   `firstname` varchar(60) NOT NULL,
   `lastname` varchar(200) NOT NULL,
   `reason` text NOT NULL,
   `startdate` varchar(20) NOT NULL,
   `enddate` varchar(20) NOT NULL,
-  `leavestatus` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `leavestatus` varchar(10) NOT NULL DEFAULT 'No',
+  PRIMARY KEY (`leaveid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `resourcemanagerleaves`
 --
 
-INSERT INTO `resourcemanagerleaves` (`id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
-(3, 'Resource', 'Manager', 'sdasd', '2018-07-10', '2018-07-05', '');
+INSERT INTO `resourcemanagerleaves` (`leaveid`, `id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
+(1, 3, 'Resource', 'Manager', 'cascsc', '2018-07-10', '2018-07-05', 'approved'),
+(2, 3, 'Resource', 'Manager', 'cdcsdc', '2018-07-10', '2018-07-05', 'disapprove'),
+(3, 3, 'Resource', 'Manager', 'sdcsdcdsc', '2018-07-10', '2018-07-05', 'No');
 
 -- --------------------------------------------------------
 

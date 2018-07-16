@@ -26,7 +26,7 @@ api.post('/empstoreLeaveData', (req, res) => {
             //console.log('here we have erroe');
         } else {
             //console.log(employeeData);
-            connection.query('INSERT INTO employeeleaves VALUES(?,?,?,?,?,?,"")', [employeeData.id, employeeData.firstname, employeeData.lastname,employeeData.reason, employeeData.startdate, employeeData.enddate], function (err, rows, fields) {
+            connection.query('INSERT INTO employeeleaves VALUES("",?,?,?,?,?,?,"")', [employeeData.id, employeeData.firstname, employeeData.lastname,employeeData.reason, employeeData.startdate, employeeData.enddate], function (err, rows, fields) {
                 if (!err) {
                     appData.error = 0;
                     appData["data"] = "data entered successfully!";
@@ -63,7 +63,7 @@ api.post('/prmanagerstoreLeaveData', (req, res) => {
             //console.log('here we have erroe');
         } else {
             //console.log(prmanagerData);
-            connection.query('INSERT INTO projectmanagerleaves VALUES(?,?,?,?,?,?,"")', [prmanagerData.id, prmanagerData.firstname, prmanagerData.lastname, prmanagerData.reason, prmanagerData.startdate, prmanagerData.enddate], function (err, rows, fields) {
+            connection.query('INSERT INTO projectmanagerleaves VALUES("",?,?,?,?,?,?,"")', [prmanagerData.id, prmanagerData.firstname, prmanagerData.lastname, prmanagerData.reason, prmanagerData.startdate, prmanagerData.enddate], function (err, rows, fields) {
                 if (!err) {
                     appData.error = 0;
                     appData["data"] = "data entered successfully!";
@@ -100,7 +100,7 @@ api.post('/rsmanagerstoreLeaveData', (req, res) => {
             //console.log('here we have erroe');
         } else {
             console.log(rsmanagerData);
-            connection.query('INSERT INTO resourcemanagerleaves VALUES(?,?,?,?,?,?,"")', [rsmanagerData.id, rsmanagerData.firstname, rsmanagerData.lastname, rsmanagerData.reason, rsmanagerData.startdate, rsmanagerData.enddate], function (err, rows, fields) {
+            connection.query('INSERT INTO resourcemanagerleaves VALUES("",?,?,?,?,?,?,"")', [rsmanagerData.id, rsmanagerData.firstname, rsmanagerData.lastname, rsmanagerData.reason, rsmanagerData.startdate, rsmanagerData.enddate], function (err, rows, fields) {
                 if (!err) {
                     appData.error = 0;
                     appData["data"] = "data entered successfully!";
@@ -548,6 +548,177 @@ api.get('/admingetinquiries', function (req, res) {
                 } else {
                     appData["data"] = "No data found";
                     res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getLeaveApplications_pm',  (req, res) => {
+    var appData = {data:[]};
+    database.connection.getConnection(function (err, connection) {
+    
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push( "Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM projectmanagerleaves WHERE leaveStatus = "No"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+api.post('/confirmLeave_pm',(req,res)=>{
+    var leaveId = req.body.leaveid;
+    var  result=req.body.result;
+    var leaveData = {leaveid:leaveId,approve:result};
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('UPDATE projectmanagerleaves SET leavestatus= ? WHERE leaveid= ?',[leaveData.approve,leaveData.leaveid], function(err, rows, fields) {
+             {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "data entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                    //console.log(err);
+                }
+            }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getLeaveApplications_rm', (req, res) => {
+    var appData = { data: [] };
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push("Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM resourcemanagerleaves WHERE leaveStatus = "No"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+api.post('/confirmLeave_rm', (req, res) => {
+    var leaveId = req.body.leaveid;
+    var result = req.body.result;
+    var leaveData = { leaveid: leaveId, approve: result };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('UPDATE resourcemanagerleaves SET leavestatus= ? WHERE leaveid= ?', [leaveData.approve, leaveData.leaveid], function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        appData["data"] = "data entered successfully!";
+                        res.status(201).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                        //console.log(err);
+                    }
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getLeaveApplications_em', (req, res) => {
+    var appData = { data: [] };
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push("Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM employeeleaves WHERE leaveStatus = "No"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+api.post('/confirmLeave_em', (req, res) => {
+    var leaveId = req.body.leaveid;
+    var result = req.body.result;
+    var leaveData = { leaveid: leaveId, approve: result };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('UPDATE employeeleaves SET leavestatus= ? WHERE leaveid= ?', [leaveData.approve, leaveData.leaveid], function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        appData["data"] = "data entered successfully!";
+                        res.status(201).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                        //console.log(err);
+                    }
                 }
             });
             connection.release();

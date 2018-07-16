@@ -218,7 +218,59 @@
           Leave-Project Manager
         </div>
         <div class="card-body">
-
+          <h5 class="card-title">Project Manager requested for leave</h5>
+          <div>
+            <button class="btn btn-primary btn-sm" (click)="getLeaveApplications_pm()" (click)="clickedApp='true'" onclick="this.disabled='true'">Applications</button>
+          </div>
+          <div *ngIf="clickedApp">
+            <ul class="list-group">
+              <li *ngFor="let application of leaveApplications" class="list-group-item d-flex justify-content-between align-items-center ">
+                {{application.name}}
+                <span class="btn-group" role="group" aria-label="Basic example">
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Leave Application</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="container">
+        
+                      <div class="panel-group">
+                        <div class=" panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b> Name</b>
+                          </div>
+                          <div class="panel-body">{{application.firstname}} {{application.lastname}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b>Reason</b>
+                          </div>
+                          <div class="panel-body">{{application.reason}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b>Data Duration</b>
+                          </div>
+                          <div class="panel-body" >{{application.startdate}} to {{application.enddate}}</div>
+        
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="setLeave_pm(application.leaveid,false)" onclick="this.disabled='true'">Reject</button>
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="setLeave_pm(application.leaveid,true)" onclick="this.disabled='true'">Approve</button>
+                    </div>
+                  </ng-template>
+        
+                  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">view</button>
+        
+                  <hr>
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -227,7 +279,61 @@
           Leave-Resource Manager
         </div>
         <div class="card-body">
-
+          <h5 class="card-title">Resource Manager requested for leave</h5>
+          <div>
+            <button class="btn btn-primary btn-sm" (click)="getLeaveApplications_rm()" (click)="clickedApp='true'" onclick="this.disabled='true'">Applications</button>
+          </div>
+          <div *ngIf="clickedApp">
+            <ul class="list-group">
+              <li *ngFor="let application of leaveApplications" class="list-group-item d-flex justify-content-between align-items-center ">
+                {{application.name}}
+                <span class="btn-group" role="group" aria-label="Basic example">
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Leave Application</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="container">
+        
+                      <div class="panel-group">
+                        <div class=" panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b> Name</b>
+                          </div>
+                          <div class="panel-body">{{application.firstname}} {{application.lastname}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b>Reason</b>
+                          </div>
+                          <div class="panel-body">{{application.reason}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b>Data Duration</b>
+                          </div>
+                          <div class="panel-body">{{application.startdate}} to {{application.enddate}}</div>
+        
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="setLeave_rm(application.leaveid,false)"
+                        onclick="this.disabled='true'">Reject</button>
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="setLeave_rm(application.leaveid,true)"
+                        onclick="this.disabled='true'">Approve</button>
+                    </div>
+                  </ng-template>
+        
+                  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">view</button>
+        
+                  <hr>
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -236,7 +342,61 @@
           Leave-Employees
         </div>
         <div class="card-body">
-
+          <h5 class="card-title">Employees requests for leave</h5>
+          <div>
+            <button class="btn btn-primary btn-sm" (click)="getLeaveApplications_em()" (click)="clickedApp='true'" onclick="this.disabled='true'">Applications</button>
+          </div>
+          <div *ngIf="clickedApp">
+            <ul class="list-group">
+              <li *ngFor="let application of leaveApplications" class="list-group-item d-flex justify-content-between align-items-center ">
+                {{application.name}}
+                <span class="btn-group" role="group" aria-label="Basic example">
+                  <ng-template #content let-c="close" let-d="dismiss">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="modal-basic-title">Leave Application</h4>
+                      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="container">
+        
+                      <div class="panel-group">
+                        <div class=" panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b> Name</b>
+                          </div>
+                          <div class="panel-body">{{application.firstname}} {{application.lastname}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b>Reason</b>
+                          </div>
+                          <div class="panel-body">{{application.reason}}</div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading panel-success">
+                            <b>Data Duration</b>
+                          </div>
+                          <div class="panel-body">{{application.startdate}} to {{application.enddate}}</div>
+        
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="setLeave_em(application.leaveid,false)"
+                        onclick="this.disabled='true'">Reject</button>
+                      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')" (click)="setLeave_em(application.leaveid,true)"
+                        onclick="this.disabled='true'">Approve</button>
+                    </div>
+                  </ng-template>
+        
+                  <button class="btn btn-lg btn-outline-primary" (click)="open(content)">view</button>
+        
+                  <hr>
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
