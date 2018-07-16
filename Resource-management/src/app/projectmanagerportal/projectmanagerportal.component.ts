@@ -18,14 +18,22 @@ export class ProjectmanagerportalComponent implements OnInit {
   leaveSuccess = false;
   reason: string;
   addSuccess = false;
+  notices = [];
+  noticeSuccess = false;
+  closeResult: string;
+  subject: string;
+  issue: string;
 
-  constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
+  constructor(private modalService: NgbModal, private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
     });
   }
 
   ngOnInit() {
+    this.dataService.prmanagergetNotices().subscribe(response => {
+      this.notices = response;
+    });
   }
 
   menu = [
@@ -91,4 +99,51 @@ export class ProjectmanagerportalComponent implements OnInit {
       setTimeout(() => this.addSuccess = false, 3000);
     }
   }
+
+  editNotice(notice) {
+    //this.dataService.editNotice(notice);
+    console.log(notice);
+  }
+
+  removeNotice(notice) {
+    //console.log(notice.title);
+    let response =this.dataService.prmanagerremoveNotice(notice);
+    if (response) {
+      this.noticeSuccess = false;
+      this.notices.splice(this.notices.indexOf(notice),1);
+      setTimeout(() => this.noticeSuccess = false, 3000);
+      this.subject = "";
+      this.issue = "";
+    }
+  }
+
+  addNotice(details) {
+    let response = this.dataService.prmanageraddNotice(details);
+    if (response) {
+      this.noticeSuccess = true;
+      this.notices.push(details);
+      setTimeout(() => this.noticeSuccess = false, 3000);
+      this.subject = "";
+      this.issue = "";
+    }
+  }
+
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
 }

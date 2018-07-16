@@ -87,7 +87,12 @@
           View Notice
         </div>
         <div class="card-body">
-          leave
+          <div *ngFor="let notice of notices" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{notice.title}}</h5>
+              <p class="card-text">{{notice.description}}</p>
+            </div>
+          </div>
         </div>
       </div>
       

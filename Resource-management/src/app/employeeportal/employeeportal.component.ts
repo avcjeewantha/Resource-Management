@@ -17,10 +17,14 @@ export class EmployeeportalComponent implements OnInit {
   form: NgForm;
   leaveSuccess = false;
   reason: string;
+  notices = [];
 
   constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
+    });
+    this.dataService.getNoticesAll().subscribe(response => {
+      this.notices = response;
     });
   }
 

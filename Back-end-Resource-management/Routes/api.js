@@ -203,4 +203,234 @@ api.post('/storeProject', (req, res) => {
 
 });
 
+api.get('/prmanagergetNotices', function (req, res) {
+
+    var appData = {};
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM prmanagernotices', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    appData["data"] = rows;
+                    //console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/rsmanagergetNotices', function (req, res) {
+
+    var appData = {};
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM rsmanagernotices', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    appData["data"] = rows;
+                    //console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getNoticesAll', function (req, res) {
+
+    var appData = {};
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM prmanagernotices UNION SELECT * FROM rsmanagernotices', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    appData["data"] = rows;
+                    console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.post('/rsmanageraddNotice', function (req, res) {
+
+    var today = new Date();
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+    var notice = {
+        "title": req.body.title,
+        "description": req.body.description,
+        "expiredate": today
+    }
+
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('INSERT INTO rsmanagernotices SET ?', notice, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "notice entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.delete('/rsmanagerremoveNotice', function (req, res) {
+    //console.log('chaaa');
+    var today = new Date();
+    var notice = {
+        "title": req.body.title,
+        "description": req.body.description,
+        "expiredate": today
+    };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+    
+    console.log(notice.title);
+    //console.log('chamoda');
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+            //console.log('here we have erroe');
+        } else {
+            //console.log(prmanagerData);
+            connection.query('DELETE FROM rsmanagernotices WHERE title=? ',notice.title, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "data entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                    //console.log(err);
+                }
+            });
+            connection.release();
+        }
+    });
+
+});
+
+api.post('/prmanageraddNotice', function (req, res) {
+
+    var today = new Date();
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+    var notice = {
+        "title": req.body.title,
+        "description": req.body.description,
+        "expiredate": today
+    }
+
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('INSERT INTO prmanagernotices SET ?', notice, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "notice entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.delete('/prmanagerremoveNotice', function (req, res) {
+    //console.log('chaaa');
+    var today = new Date();
+    var notice = {
+        "title": req.body.title,
+        "description": req.body.description,
+        "expiredate": today
+    };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+
+    console.log(notice.title);
+    //console.log('chamoda');
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+            //console.log('here we have erroe');
+        } else {
+            //console.log(prmanagerData);
+            connection.query('DELETE FROM prmanagernotices WHERE title=?',notice.title, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "data entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                    //console.log(err);
+                }
+            });
+            connection.release();
+        }
+    });
+
+});
+
 module.exports = api;

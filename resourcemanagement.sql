@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2018 at 01:43 PM
+-- Generation Time: Jul 16, 2018 at 07:05 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -83,6 +83,32 @@ INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdat
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `prmanagernotices`
+--
+
+CREATE TABLE IF NOT EXISTS `prmanagernotices` (
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `expiredate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `prmanagernotices`
+--
+
+INSERT INTO `prmanagernotices` (`title`, `description`, `expiredate`) VALUES
+('', 'Helloooo', '2018-07-15'),
+('', 'hiiiii', '2018-07-15'),
+('', 'gvhgghvh', '2018-07-15'),
+('', 'vbcgcghhv', '2018-07-15'),
+('', 'fghffttfgvbvbvbvhgytyt', '2018-07-15'),
+('jnjnnjjnj', 'njnkjn', '2018-07-15'),
+('nvgh', 'vvhgv', '2018-07-15'),
+('helllllooooo', 'sampleeee', '2018-07-16');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `projectmanagerleaves`
 --
 
@@ -155,6 +181,27 @@ CREATE TABLE IF NOT EXISTS `resourcemanagerleaves` (
 
 INSERT INTO `resourcemanagerleaves` (`id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
 (3, 'Resource', 'Manager', 'sdasd', '2018-07-10', '2018-07-05', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rsmanagernotices`
+--
+
+CREATE TABLE IF NOT EXISTS `rsmanagernotices` (
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `expiredate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rsmanagernotices`
+--
+
+INSERT INTO `rsmanagernotices` (`title`, `description`, `expiredate`) VALUES
+('sample', 'add notice', '2018-07-16'),
+('aqwerdewdwed', 'wefwefwe', '2018-07-16'),
+('wefdwefwefwef', 'afqfwfwefwef', '2018-07-16');
 
 -- --------------------------------------------------------
 
