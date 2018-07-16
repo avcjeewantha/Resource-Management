@@ -23,10 +23,15 @@ export class ProjectmanagerportalComponent implements OnInit {
   closeResult: string;
   subject: string;
   issue: string;
+  inquiry: string;
+  viewinquiries = [];
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
+    });
+    this.dataService.prmanagergetinquiries().subscribe(response => {
+      this.viewinquiries = response;
     });
   }
 
@@ -143,6 +148,16 @@ export class ProjectmanagerportalComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
+    }
+  }
+
+  newInquiry(Inquiry) {
+    let response = this.dataService.newInquiryToadmin(Inquiry);
+    if (response) {
+      this.success = true;
+      setTimeout(() => this.success = false, 3000);
+      this.subject = "";
+      this.inquiry = "";
     }
   }
 

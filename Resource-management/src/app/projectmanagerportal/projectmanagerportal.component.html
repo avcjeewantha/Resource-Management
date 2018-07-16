@@ -311,10 +311,15 @@
 
       <div *ngIf="category==='viewinquiries'" class="card">
         <div class="card-header">
-          View Inquiries
+          View Inquiries From RM
         </div>
         <div class="card-body">
-
+          <div *ngFor="let viewinquiry of viewinquiries" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{viewinquiry.subject}}</h5>
+              <p class="card-text">{{viewinquiry.inquiry}}</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -323,7 +328,22 @@
           Inquiries
         </div>
         <div class="card-body">
-
+          <div *ngIf="success" class="alert alert-success" role="alert">
+            Your Inquiry has been submitted.
+          </div>
+          <form #f="ngForm" (ngSubmit)="newInquiry(f.value); f.reset()">
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="email" ngModel name="subject" class="form-control" id="subject" placeholder="Enter Subject" value="{{this.subject}}">
+            </div>
+            <div class="form-group">
+              <label for="inquiry">Inquiry</label>
+              <textarea ngModel name="inquiry" class="form-control" id="inquiry" rows="3" placeholder="Enter Your Inquiry" value="this.inquiry"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">
+              Submit
+            </button>
+          </form>
         </div>
       </div>
 

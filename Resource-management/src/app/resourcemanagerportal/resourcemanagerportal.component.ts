@@ -23,6 +23,7 @@ export class ResourcemanagerportalComponent implements OnInit {
   closeResult: string;
   subject: string;
   issue: string;
+  inquiry: string;
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -108,6 +109,16 @@ export class ResourcemanagerportalComponent implements OnInit {
       return 'by clicking on a backdrop';
     } else {
       return `with: ${reason}`;
+    }
+  }
+
+  newInquiry(Inquiry) {
+    let response = this.dataService.newInquiryTopr(Inquiry);
+    if (response) {
+      this.success = true;
+      setTimeout(() => this.success = false, 3000);
+      this.subject = "";
+      this.inquiry = "";
     }
   }
 }

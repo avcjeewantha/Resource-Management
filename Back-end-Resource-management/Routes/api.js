@@ -433,4 +433,127 @@ api.delete('/prmanagerremoveNotice', function (req, res) {
 
 });
 
+api.post('/newinquirytopr', function (req, res) {
+
+    var today = new Date();
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+    var inquiry = {
+        "subject": req.body.subject,
+        "inquiry": req.body.inquiry,
+        "created": today
+    }
+
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('INSERT INTO rsmanagerinquiries SET ?', inquiry, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "notice entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.post('/newinquirytoadmin', function (req, res) {
+
+    var today = new Date();
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+    var inquiry = {
+        "subject": req.body.subject,
+        "inquiry": req.body.inquiry,
+        "created": today
+    }
+
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('INSERT INTO prmanagerinquiries SET ?', inquiry, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "notice entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/prmanagergetinquiries', function (req, res) {
+
+    var appData = {};
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM rsmanagerinquiries', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    appData["data"] = rows;
+                    console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/admingetinquiries', function (req, res) {
+
+    var appData = {};
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM prmanagerinquiries', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    appData["data"] = rows;
+                    console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+
 module.exports = api;

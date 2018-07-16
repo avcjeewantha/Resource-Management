@@ -15,10 +15,14 @@ export class AdminportalComponent implements OnInit {
   category: string;
   addSuccess = false;
   form: NgForm;
+  viewinquiries = [];
 
   constructor(private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private dateparser: NgbDateParserFormatter) {
     route.queryParamMap.subscribe(params => {
       this.category = params.get('category');
+    });
+    this.dataService.admingetinquiries().subscribe(response => {
+      this.viewinquiries = response;
     });
   }
 
@@ -29,6 +33,7 @@ export class AdminportalComponent implements OnInit {
     { name: 'Add Employee', key: 'addemployee' },
     { name: 'Get Employee Details', key: 'getemployeedetails' },
     { name: 'View Projects', key: 'viewprojects' },
+    { name: 'View Inquiries', key: 'viewinquiries' },
     { name: 'Leave-Project Manager', key: 'leave-projectmanager' },
     { name: 'Leave-Resource Manager', key: 'leave-resourcemanager' },
     { name: 'Leave-Employees', key: 'leave-employees' }

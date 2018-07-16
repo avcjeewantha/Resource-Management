@@ -199,6 +199,20 @@
         </div>
       </div>
 
+      <div *ngIf="category==='viewinquiries'" class="card">
+        <div class="card-header">
+          View Inquiries From PM
+        </div>
+        <div class="card-body">
+          <div *ngFor="let viewinquiry of viewinquiries" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{viewinquiry.subject}}</h5>
+              <p class="card-text">{{viewinquiry.inquiry}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div *ngIf="category==='leave-projectmanager'" class="card">
         <div class="card-header">
           Leave-Project Manager

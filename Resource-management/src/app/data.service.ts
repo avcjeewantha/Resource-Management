@@ -86,4 +86,31 @@ export class DataService {
     });
   }
 
+  newInquiryTopr(Inquiry){
+    //console.log(Inquiry);
+    return this.http.post("http://localhost:3000/api/newInquirytopr",Inquiry).subscribe(response => {
+      return response.json();
+    });
+  }
+
+  newInquiryToadmin(Inquiry) {
+    //console.log(Inquiry);
+    return this.http.post("http://localhost:3000/api/newInquirytoadmin", Inquiry).subscribe(response => {
+      return response.json();
+    });
+  }
+
+  prmanagergetinquiries() {
+    return this.http.get("http://localhost:3000/api/prmanagergetinquiries").map(response => {
+      //console.log(response.json().data);
+      return response.json().data;
+    });
+  }
+
+  admingetinquiries() {
+    return this.http.get("http://localhost:3000/api/admingetinquiries").map(response => {
+      //console.log(response.json().data);
+      return response.json().data;
+    });
+  }
 }

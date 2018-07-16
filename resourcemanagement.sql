@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2018 at 07:05 AM
+-- Generation Time: Jul 16, 2018 at 08:02 AM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -79,6 +79,25 @@ INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdat
 (3, '', '', '', '', '', '', '', '', '', '', '', ''),
 (4, 'Employee', 'Employee', '', '', '', '', '', 'employee@gmail.com', '', '', '', ''),
 (10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `prmanagerinquiries`
+--
+
+CREATE TABLE IF NOT EXISTS `prmanagerinquiries` (
+  `subject` text NOT NULL,
+  `inquiry` text NOT NULL,
+  `created` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `prmanagerinquiries`
+--
+
+INSERT INTO `prmanagerinquiries` (`subject`, `inquiry`, `created`) VALUES
+('prtext', 'halooo', '2018-07-16');
 
 -- --------------------------------------------------------
 
@@ -181,6 +200,25 @@ CREATE TABLE IF NOT EXISTS `resourcemanagerleaves` (
 
 INSERT INTO `resourcemanagerleaves` (`id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
 (3, 'Resource', 'Manager', 'sdasd', '2018-07-10', '2018-07-05', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rsmanagerinquiries`
+--
+
+CREATE TABLE IF NOT EXISTS `rsmanagerinquiries` (
+  `subject` text NOT NULL,
+  `inquiry` text NOT NULL,
+  `created` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `rsmanagerinquiries`
+--
+
+INSERT INTO `rsmanagerinquiries` (`subject`, `inquiry`, `created`) VALUES
+('text', 'incc', '2018-07-16');
 
 -- --------------------------------------------------------
 
