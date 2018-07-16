@@ -145,7 +145,7 @@ export class DataService {
   }
   setLeave_rm(leaveid: number, decision: string) {
     let data = { leaveid: leaveid, result: decision };
-    console.log(data);
+    //console.log(data);
     return this.http.post("http://localhost:3000/api/confirmLeave_rm", data).subscribe(response => {
       return response.json();
     });
@@ -154,7 +154,7 @@ export class DataService {
     let leaveId = { 'id': id };
     //console.log(leaveId);
     this.http.delete("http://localhost:3000/api/deleteLeaveApplication_rm" + leaveId).map(response => {
-      console.log(response.json().data);
+      //console.log(response.json().data);
       return (response.json().data);
     });
   }
@@ -167,7 +167,7 @@ getLeaveApp_em() {
 }
 setLeave_em(leaveid: number, decision: string) {
   let data = { leaveid: leaveid, result: decision };
-  console.log(data);
+  //console.log(data);
   return this.http.post("http://localhost:3000/api/confirmLeave_em", data).subscribe(response => {
     return response.json();
   });
@@ -176,9 +176,16 @@ deleteLeaveAppliccation_em(id: number) {
   let leaveId = { 'id': id };
    //console.log(leaveId);
    this.http.delete("http://localhost:3000/api/deleteLeaveApplication_em" + leaveId).map(response => {
-    console.log(response.json().data);
+    //console.log(response.json().data);
     return (response.json().data);
   });
  }
+
+  getdetails(detailId) {
+    return this.http.post('http://localhost:3000/api/getdetails', detailId)
+      .map(response => {
+        return(response.json().data);      
+      });
+  }
 
 }

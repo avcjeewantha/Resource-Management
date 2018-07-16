@@ -517,7 +517,7 @@ api.get('/prmanagergetinquiries', function (req, res) {
                 if (!err) {
                     appData["error"] = 0;
                     appData["data"] = rows;
-                    console.log(appData);
+                    //console.log(appData);
                     res.status(200).json(appData);
                 } else {
                     appData["data"] = "No data found";
@@ -543,7 +543,7 @@ api.get('/admingetinquiries', function (req, res) {
                 if (!err) {
                     appData["error"] = 0;
                     appData["data"] = rows;
-                    console.log(appData);
+                    //console.log(appData);
                     res.status(200).json(appData);
                 } else {
                     appData["data"] = "No data found";
@@ -726,5 +726,36 @@ api.post('/confirmLeave_em', (req, res) => {
     });
 });
 
+api.post('/getdetails', (req, res) => {
+    var detailId = req.body.detailId;
+    
+    var detailData = { detailId: detailId };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(detailData);
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM employees WHERE id= ?',detailData.detailId, function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        appData["data"] = rows[0];
+                        res.status(200).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                    }
+                }
+            });
+            connection.release();
+        }
+    });
+});
 
 module.exports = api;

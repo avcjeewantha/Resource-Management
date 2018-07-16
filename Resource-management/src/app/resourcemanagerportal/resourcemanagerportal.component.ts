@@ -37,6 +37,10 @@ export class ResourcemanagerportalComponent implements OnInit {
     });
   }
 
+  clickedApp: boolean;
+  leaveApplications: any;
+  employeedetails: any;
+
   menu = [
     { name: 'Up Coming Projects', key: 'upcomingprojects' },
     { name: 'Request For Leave', key: 'requestforleave' },
@@ -122,4 +126,12 @@ export class ResourcemanagerportalComponent implements OnInit {
     }
   }
   
+  getdetails(detailId) {
+    //console.log(detailId);
+    let id = detailId;
+    this.dataService.getdetails(id).subscribe((response) => {
+      this.employeedetails = (response);
+      //console.log(this.employeedetails);
+    });
+  }
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2018 at 10:46 AM
+-- Generation Time: Jul 16, 2018 at 10:29 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `nodejs` varchar(8) NOT NULL,
   `assignedprojects` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `employees`
@@ -80,8 +80,9 @@ INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdat
 (1, '', '', '', '', '', '', '', '', '', '', '', ''),
 (2, '', '', '', '', '', '', '', '', '', '', '', ''),
 (3, '', '', '', '', '', '', '', '', '', '', '', ''),
-(4, 'Employee', 'Employee', '', '', '', '', '', 'employee@gmail.com', '', '', '', ''),
-(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', '');
+(4, '', '', '', '', '', '', '', '', '', '', '', ''),
+(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', ''),
+(11, 'muditha', 'charani', 'ratanapura', 'weligama', '2018-07-03', '2018-07-11', '712245489', 'mudithaemployee@gmail.com', 'Yes', 'Yes', 'Yes', '');
 
 -- --------------------------------------------------------
 
@@ -265,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(20) NOT NULL,
   `type` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Dumping data for table `users`
@@ -275,8 +276,9 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `address`, `email`, `passwor
 (1, 'Admin', 'Admin', '', 'admin@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'admin'),
 (2, 'Project', 'Manager', '', 'projectmanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'projectmanager'),
 (3, 'Resource', 'Manager', '', 'resourcemanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'resourcemanager'),
-(4, 'Employee', 'Employee', '', 'employee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(10, 'kamal', 'saman', 'matara', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
+(4, '', '', '', '', '', ''),
+(10, 'kamal', 'saman', 'matara', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
+(11, 'muditha', 'charani', 'ratanapura', 'mudithaemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

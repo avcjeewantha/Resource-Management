@@ -32,6 +32,7 @@ export class AdminportalComponent implements OnInit {
 
   clickedApp: boolean;
   leaveApplications: any;
+  employeedetails: any;
 
   menu = [
     { name: 'Add Employee', key: 'addemployee' },
@@ -144,4 +145,14 @@ export class AdminportalComponent implements OnInit {
     var index = this.leaveApplications.indexOf(this.leaveApplications.leaveid = leaveid);
     this.leaveApplications.splice(index + 1, 1);
   }
+
+  getdetails(detailId) {
+    //console.log(detailId);
+    let id = detailId;
+    this.dataService.getdetails(id).subscribe((response) => {
+      this.employeedetails = (response);
+      //console.log(this.employeedetails);
+    });
+  }
+
 }

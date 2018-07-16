@@ -41,6 +41,10 @@ export class ProjectmanagerportalComponent implements OnInit {
     });
   }
 
+  clickedApp: boolean;
+  leaveApplications: any;
+  employeedetails: any;
+
   menu = [
     { name: 'Up Coming Projects', key: 'upcomingprojects' },
     { name: 'Selected Employees', key: 'selectedemployees' },
@@ -159,6 +163,15 @@ export class ProjectmanagerportalComponent implements OnInit {
       this.subject = "";
       this.inquiry = "";
     }
+  }
+
+  getdetails(detailId) {
+    //console.log(detailId);
+    let id = detailId;
+    this.dataService.getdetails(id).subscribe((response) => {
+      this.employeedetails = (response);
+      //console.log(this.employeedetails);
+    });
   }
 
 }
