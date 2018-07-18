@@ -33,6 +33,7 @@ export class AdminportalComponent implements OnInit {
   clickedApp: boolean;
   leaveApplications: any;
   employeedetails: any;
+  projectdetails: any;
 
   menu = [
     { name: 'Add Employee', key: 'addemployee' },
@@ -152,6 +153,15 @@ export class AdminportalComponent implements OnInit {
     this.dataService.getdetails(id).subscribe((response) => {
       this.employeedetails = (response);
       //console.log(this.employeedetails);
+    });
+  }
+
+  getprojectdetails(detailId) {
+    //console.log(detailId);
+    let id = detailId;
+    this.dataService.getprojectdetails(id).subscribe((response) => {
+      this.projectdetails = (response);
+      //console.log(this.projectdetails);
     });
   }
 

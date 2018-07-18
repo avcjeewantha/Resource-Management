@@ -240,4 +240,12 @@ export class DataService {
       });
   }
 
+  getprojectdetails(detailId) {
+    //console.log(detailId);
+    return this.http.post('http://localhost:3000/api/getprojectdetails', detailId)
+      .map(response => {
+        return (response.json().data);
+      });
+  }
+
 }
