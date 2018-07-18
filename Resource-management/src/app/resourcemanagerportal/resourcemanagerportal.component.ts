@@ -91,7 +91,7 @@ export class ResourcemanagerportalComponent implements OnInit {
 
   removeNotice(notice) {
     //console.log(notice.title);
-    let response = this.dataService.rsmanagerremoveNotice(notice);
+    let response = this.dataService.rsmanagerremoveNotice(notice.id);
     if (response) {
       this.noticeSuccess = false;
       this.notices.splice(this.notices.indexOf(notice), 1);

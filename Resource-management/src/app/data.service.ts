@@ -65,9 +65,9 @@ export class DataService {
     });
   }
 
-  prmanagerremoveNotice(notice) {
-    //console.log(notice.title);
-    return this.http.delete("http://localhost:3000/api/prmanagerremoveNotice", notice).map(response => {
+  prmanagerremoveNotice(id) {
+    let data = { id: id };
+    return this.http.post("http://localhost:3000/api/prmanagerremoveNotice", data).subscribe(response => {
       return response.json();
     });
   }
@@ -79,9 +79,29 @@ export class DataService {
     });
   }
 
-  rsmanagerremoveNotice(notice) {
-    //console.log(notice.title);
-    return this.http.delete("http://localhost:3000/api/rsmanagerremoveNotice", notice).map(response => {
+  rsmanagerremoveNotice(id) {
+    let data = { id: id };
+    return this.http.post("http://localhost:3000/api/rsmanagerremoveNotice", data).subscribe(response => {
+      return response.json();
+    });
+  }
+
+  admingetNotices() {
+    return this.http.get("http://localhost:3000/api/admingetNotices").map(response => {
+      //console.log(response.json().data);
+      return response.json().data;
+    });
+  }
+  adminaddNotice(details) {
+    //console.log(details);
+    return this.http.post("http://localhost:3000/api/adminaddNotice", details).subscribe(response => {
+      return response.json();
+    });
+  }
+
+  adminremoveNotice(id) {
+    let data = { id: id };
+    return this.http.post("http://localhost:3000/api/adminremoveNotice", data).subscribe(response => {
       return response.json();
     });
   }

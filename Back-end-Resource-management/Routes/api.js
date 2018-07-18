@@ -213,7 +213,33 @@ api.get('/prmanagergetNotices', function (req, res) {
             appData["data"] = "Internal Server Error";
             res.status(500).json(appData);
         } else {
-            connection.query('SELECT * FROM prmanagernotices', function (err, rows, fields) {
+            connection.query('SELECT * FROM prmanagernotices  WHERE noticestatus="Yes"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    appData["data"] = rows;
+                    //console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/admingetNotices', function (req, res) {
+
+    var appData = {};
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM adminnotices  WHERE noticestatus="Yes"', function (err, rows, fields) {
                 if (!err) {
                     appData["error"] = 0;
                     appData["data"] = rows;
@@ -239,7 +265,7 @@ api.get('/rsmanagergetNotices', function (req, res) {
             appData["data"] = "Internal Server Error";
             res.status(500).json(appData);
         } else {
-            connection.query('SELECT * FROM rsmanagernotices', function (err, rows, fields) {
+            connection.query('SELECT * FROM rsmanagernotices  WHERE noticestatus="Yes"', function (err, rows, fields) {
                 if (!err) {
                     appData["error"] = 0;
                     appData["data"] = rows;
@@ -265,7 +291,7 @@ api.get('/getNoticesAll', function (req, res) {
             appData["data"] = "Internal Server Error";
             res.status(500).json(appData);
         } else {
-            connection.query('SELECT * FROM prmanagernotices UNION SELECT * FROM rsmanagernotices', function (err, rows, fields) {
+            connection.query('SELECT * FROM prmanagernotices WHERE noticestatus="Yes" UNION SELECT * FROM rsmanagernotices  WHERE noticestatus="Yes" UNION SELECT * FROM adminnotices WHERE noticestatus="Yes"', function (err, rows, fields) {
                 if (!err) {
                     appData["error"] = 0;
                     appData["data"] = rows;
@@ -316,13 +342,46 @@ api.post('/rsmanageraddNotice', function (req, res) {
     });
 });
 
-api.delete('/rsmanagerremoveNotice', function (req, res) {
-    //console.log('chaaa');
+api.post('/adminaddNotice', function (req, res) {
+
     var today = new Date();
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
     var notice = {
         "title": req.body.title,
         "description": req.body.description,
         "expiredate": today
+    }
+
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('INSERT INTO adminnotices SET ?', notice, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "notice entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.post('/rsmanagerremoveNotice', function (req, res) {
+    //console.log('chaaa');
+    //var today = new Date();
+    var notice = {
+        id: req.body.id
     };
     var appData = {
         "error": 1,
@@ -330,7 +389,7 @@ api.delete('/rsmanagerremoveNotice', function (req, res) {
     };
     //console.log(today);
     
-    console.log(notice.title);
+    //console.log(notice.title);
     //console.log('chamoda');
     database.connection.getConnection(function (err, connection) {
         if (err) {
@@ -340,7 +399,46 @@ api.delete('/rsmanagerremoveNotice', function (req, res) {
             //console.log('here we have erroe');
         } else {
             //console.log(prmanagerData);
-            connection.query('DELETE FROM rsmanagernotices WHERE title=? ',notice.title, function (err, rows, fields) {
+            connection.query('UPDATE rsmanagernotices SET noticestatus="No" WHERE id=? ',notice.id, function (err, rows, fields) {
+                if (!err) {
+                    appData.error = 0;
+                    appData["data"] = "data entered successfully!";
+                    res.status(201).json(appData);
+                } else {
+                    appData["data"] = err;
+                    res.status(400).json(appData);
+                    //console.log(err);
+                }
+            });
+            connection.release();
+        }
+    });
+
+});
+
+api.post('/adminremoveNotice', function (req, res) {
+    //console.log('chaaa');
+    //var today = new Date();
+    var notice = {
+        id: req.body.id
+    };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(today);
+
+    //console.log(notice.title);
+    //console.log('chamoda');
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+            //console.log('here we have erroe');
+        } else {
+            //console.log(prmanagerData);
+            connection.query('UPDATE adminnotices SET noticestatus="No" WHERE id=? ', notice.id, function (err, rows, fields) {
                 if (!err) {
                     appData.error = 0;
                     appData["data"] = "data entered successfully!";
@@ -392,45 +490,37 @@ api.post('/prmanageraddNotice', function (req, res) {
     });
 });
 
-api.delete('/prmanagerremoveNotice', function (req, res) {
-    //console.log('chaaa');
-    var today = new Date();
+api.post('/prmanagerremoveNotice', (req, res) => {
+    //var today = new Date();
     var notice = {
-        "title": req.body.title,
-        "description": req.body.description,
-        "expiredate": today
+        id: req.body.id
     };
     var appData = {
         "error": 1,
         "data": ""
     };
-    //console.log(today);
-
-    console.log(notice.title);
-    //console.log('chamoda');
     database.connection.getConnection(function (err, connection) {
         if (err) {
             appData["error"] = 1;
             appData["data"] = "Internal Server Error";
             res.status(500).json(appData);
-            //console.log('here we have erroe');
         } else {
-            //console.log(prmanagerData);
-            connection.query('DELETE FROM prmanagernotices WHERE title=?',notice.title, function (err, rows, fields) {
-                if (!err) {
-                    appData.error = 0;
-                    appData["data"] = "data entered successfully!";
-                    res.status(201).json(appData);
-                } else {
-                    appData["data"] = err;
-                    res.status(400).json(appData);
-                    //console.log(err);
+            connection.query('UPDATE prmanagernotices SET noticestatus="No" WHERE id=? ', notice.id, function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        appData["data"] = "data entered successfully!";
+                        res.status(201).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                        //console.log(err);
+                    }
                 }
             });
             connection.release();
         }
     });
-
 });
 
 api.post('/newinquirytopr', function (req, res) {

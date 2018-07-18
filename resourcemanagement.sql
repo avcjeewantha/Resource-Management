@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2018 at 05:35 PM
+-- Generation Time: Jul 18, 2018 at 06:51 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -25,6 +25,21 @@ USE `resourcemanagement`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `adminnotices`
+--
+
+CREATE TABLE IF NOT EXISTS `adminnotices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text NOT NULL,
+  `description` text NOT NULL,
+  `expiredate` date NOT NULL,
+  `noticestatus` varchar(5) NOT NULL DEFAULT 'Yes',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `employeeleaves`
 --
 
@@ -38,16 +53,7 @@ CREATE TABLE IF NOT EXISTS `employeeleaves` (
   `enddate` varchar(20) NOT NULL,
   `leavestatus` varchar(10) NOT NULL DEFAULT 'No',
   PRIMARY KEY (`leaveid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `employeeleaves`
---
-
-INSERT INTO `employeeleaves` (`leaveid`, `id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
-(1, 4, 'Employee', 'Employee', 'vdfvfvf', '2018-07-18', '2018-07-05', 'approved'),
-(2, 4, 'Employee', 'Employee', 'cdsdcscsdc', '2018-07-10', '2018-07-27', 'disapprove'),
-(3, 4, 'Employee', 'Employee', 'sdvsvsdv', '2018-07-10', '2018-07-27', 'No');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -81,12 +87,12 @@ INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdat
 (2, '', '', '', '', '', '', '', '', '', '', '', ''),
 (3, '', '', '', '', '', '', '', '', '', '', '', ''),
 (4, '', '', '', '', '', '', '', '', '', '', '', ''),
-(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', ' 1, '),
-(11, 'muditha', 'charani', 'ratanapura', 'weligama', '2018-07-03', '2018-07-11', '712245489', 'mudithaemployee@gmail.com', 'Yes', 'Yes', 'Yes', '2, 4, '),
-(12, 'sahan', 'jeaa', 'asdr', 'cas', '2018-07-03', '2018-07-11', '778954622', 'sahanemployee@gmail.com', 'Yes', 'No', 'Yes', '1, 2, 2, 4, '),
-(13, 'avc', 'cbxbx', 'fgsggsd', 'sfsdfsdf', '2018-07-03', '2018-07-11', '776261899', 'avcemployee@gmail.com', 'Yes', 'Yes', 'No', ''),
-(14, 'perera', 'dcsdc', 'wedewd', 'wedwedew', '2018-07-03', '2018-07-11', '778956422', 'pereraemployee@gmail.com', 'Yes', 'Yes', 'Yes', '1, 1, '),
-(15, 'dasun', 'sdvsdv', 'sdsacd', 'sdavasdv', '2018-07-03', '2018-07-11', '778956244', 'dasunemployee@gmail.com', 'Yes', 'Yes', 'Yes', '');
+(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'No', ' '),
+(11, 'muditha', 'charani', 'ratanapura', 'weligama', '2018-07-03', '2018-07-11', '712245489', 'mudithaemployee@gmail.com', 'No', 'Yes', 'No', ''),
+(12, 'sahan', 'jeaa', 'asdr', 'cas', '2018-07-03', '2018-07-11', '778954622', 'sahanemployee@gmail.com', 'No', 'No', 'Yes', ''),
+(13, 'avc', 'cbxbx', 'fgsggsd', 'sfsdfsdf', '2018-07-03', '2018-07-11', '776261899', 'avcemployee@gmail.com', 'Yes', 'No', 'No', ''),
+(14, 'perera', 'dcsdc', 'wedewd', 'wedwedew', '2018-07-03', '2018-07-11', '778956422', 'pereraemployee@gmail.com', 'No', 'Yes', 'No', ''),
+(15, 'dasun', 'sdvsdv', 'sdsacd', 'sdavasdv', '2018-07-03', '2018-07-11', '778956244', 'dasunemployee@gmail.com', 'No', 'No', 'Yes', '');
 
 -- --------------------------------------------------------
 
@@ -100,13 +106,6 @@ CREATE TABLE IF NOT EXISTS `prmanagerinquiries` (
   `created` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `prmanagerinquiries`
---
-
-INSERT INTO `prmanagerinquiries` (`subject`, `inquiry`, `created`) VALUES
-('prtext', 'halooo', '2018-07-16');
-
 -- --------------------------------------------------------
 
 --
@@ -114,24 +113,13 @@ INSERT INTO `prmanagerinquiries` (`subject`, `inquiry`, `created`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `prmanagernotices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   `description` text NOT NULL,
-  `expiredate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `prmanagernotices`
---
-
-INSERT INTO `prmanagernotices` (`title`, `description`, `expiredate`) VALUES
-('', 'Helloooo', '2018-07-15'),
-('', 'hiiiii', '2018-07-15'),
-('', 'gvhgghvh', '2018-07-15'),
-('', 'vbcgcghhv', '2018-07-15'),
-('', 'fghffttfgvbvbvbvhgytyt', '2018-07-15'),
-('jnjnnjjnj', 'njnkjn', '2018-07-15'),
-('nvgh', 'vvhgv', '2018-07-15'),
-('helllllooooo', 'sampleeee', '2018-07-16');
+  `expiredate` date NOT NULL,
+  `noticestatus` varchar(5) NOT NULL DEFAULT 'Yes',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -149,16 +137,7 @@ CREATE TABLE IF NOT EXISTS `projectmanagerleaves` (
   `enddate` varchar(20) NOT NULL,
   `leavestatus` varchar(10) NOT NULL DEFAULT 'No',
   PRIMARY KEY (`leaveid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `projectmanagerleaves`
---
-
-INSERT INTO `projectmanagerleaves` (`leaveid`, `id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
-(1, 2, 'Project', 'Manager', 'svfdvcdsv', '2018-07-03', '2018-07-05', 'disapprove'),
-(2, 2, 'Project', 'Manager', 'cdcwcw', '2018-07-10', '2018-07-27', 'disapprove'),
-(3, 2, 'Project', 'Manager', 'wecwecwe', '2018-07-10', '2018-07-27', 'approved');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -181,18 +160,6 @@ CREATE TABLE IF NOT EXISTS `projects` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `projects`
---
-
-INSERT INTO `projects` (`id`, `projectname`, `numofemployees`, `budget`, `sdate`, `edate`, `java`, `angular`, `nodejs`, `assignedemployees`, `assigned`) VALUES
-(1, 'test', 2, '1456', '2018-07-03', '2018-07-27', 'Yes', 'No', 'Yes', '10, 12, 14, 14, ', 'Yes'),
-(2, 'test', 10, '14582', '2018-07-10', '2018-07-27', 'Yes', 'No', 'Yes', '12, 11, 12, ', 'Yes'),
-(3, 'ghttt', 14, '14522', '2018-07-03', '2018-07-27', 'Yes', 'Yes', 'No', '', 'Yes'),
-(4, 'bjgghjjg', 2, '14582', '2018-07-10', '2018-07-27', 'No', 'Yes', 'Yes', '12, 11, ', 'Yes'),
-(5, 'sdcsdcdc', 3, '145585', '2018-07-10', '2018-07-27', 'Yes', 'No', 'Yes', '', 'Yes'),
-(6, 'test', 5, '45897', '2018-07-10', '2018-07-27', 'Yes', 'Yes', 'No', '', 'No');
-
 -- --------------------------------------------------------
 
 --
@@ -209,16 +176,7 @@ CREATE TABLE IF NOT EXISTS `resourcemanagerleaves` (
   `enddate` varchar(20) NOT NULL,
   `leavestatus` varchar(10) NOT NULL DEFAULT 'No',
   PRIMARY KEY (`leaveid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `resourcemanagerleaves`
---
-
-INSERT INTO `resourcemanagerleaves` (`leaveid`, `id`, `firstname`, `lastname`, `reason`, `startdate`, `enddate`, `leavestatus`) VALUES
-(1, 3, 'Resource', 'Manager', 'cascsc', '2018-07-10', '2018-07-05', 'approved'),
-(2, 3, 'Resource', 'Manager', 'cdcsdc', '2018-07-10', '2018-07-05', 'disapprove'),
-(3, 3, 'Resource', 'Manager', 'sdcsdcdsc', '2018-07-10', '2018-07-05', 'No');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -232,13 +190,6 @@ CREATE TABLE IF NOT EXISTS `rsmanagerinquiries` (
   `created` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `rsmanagerinquiries`
---
-
-INSERT INTO `rsmanagerinquiries` (`subject`, `inquiry`, `created`) VALUES
-('text', 'incc', '2018-07-16');
-
 -- --------------------------------------------------------
 
 --
@@ -246,19 +197,13 @@ INSERT INTO `rsmanagerinquiries` (`subject`, `inquiry`, `created`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rsmanagernotices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text NOT NULL,
   `description` text NOT NULL,
-  `expiredate` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `rsmanagernotices`
---
-
-INSERT INTO `rsmanagernotices` (`title`, `description`, `expiredate`) VALUES
-('sample', 'add notice', '2018-07-16'),
-('aqwerdewdwed', 'wefwefwe', '2018-07-16'),
-('wefdwefwefwef', 'afqfwfwefwef', '2018-07-16');
+  `expiredate` date NOT NULL,
+  `noticestatus` varchar(5) NOT NULL DEFAULT 'Yes',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -286,12 +231,7 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `address`, `email`, `passwor
 (2, 'Project', 'Manager', '', 'projectmanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'projectmanager'),
 (3, 'Resource', 'Manager', '', 'resourcemanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'resourcemanager'),
 (4, '', '', '', '', '', ''),
-(10, 'kamal', 'saman', 'matara', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(11, 'muditha', 'charani', 'ratanapura', 'mudithaemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(12, 'sahan', 'jeaa', 'asdr', 'sahanemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(13, 'avc', 'cbxbx', 'fgsggsd', 'avcemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(14, 'perera', 'dcsdc', 'wedewd', 'pereraemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(15, 'dasun', 'sdvsdv', 'sdsacd', 'dasunemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
+(10, 'kamal', 'saman', 'matara', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -285,6 +285,59 @@
         </div>
       </div>
 
+      <div *ngIf="category==='addanotice'" class="card">
+        <div class="card-header">
+          Add a Notice
+        </div>
+        <div class="card-body">
+          <div *ngIf="noticeSuccess" class="alert alert-success" role="alert">
+            Your notice has been submitted.
+          </div>
+      
+          <div *ngFor="let notice of notices" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{notice.title}}</h5>
+              <p class="card-text">{{notice.description}}</p>
+            </div>
+            <div>
+              <!--button class="btn btn-lg btn-outline-primary   float-mid" (click)="editNotice(notice)">Edit</button-->
+      
+              <button class="btn btn-lg btn-outline-primary float-right" (click)="removeNotice(notice)">Remove</button>
+            </div>
+          </div>
+      
+          <div>
+            <ng-template #content7 let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title"> New Notice</h4>
+                <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form #n="ngForm">
+                  <div class="form-group">
+                    <label for="title">Title</label>
+                    <input ngModel type="text" name="title" class="form-control" id="title" placeholder="Enter the Title">
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea ngModel name="description" class="form-control" id="description" rows="3" placeholder="Enter Your description"></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-dark" (click)="c('Save click')" (click)=addNotice(n.value)>Save</button>
+              </div>
+            </ng-template>
+      
+            <button class="btn btn-lg btn-outline-primary" (click)="open(content7)">Add Notice</button>
+      
+          </div>
+        </div>
+      
+      </div>
+
       <div *ngIf="category==='viewprojects'" class="card">
         <div class="card-header">
           View Projects

@@ -17,6 +17,10 @@ export class AdminportalComponent implements OnInit {
   form: NgForm;
   viewinquiries = [];
   closeResult: string;
+  subject: string;
+  issue: string;
+  notices = [];
+  noticeSuccess = false;
 
   constructor(private modalService: NgbModal,private route: ActivatedRoute, private dataService: DataService, private authService: AuthService, private dateparser: NgbDateParserFormatter) {
     route.queryParamMap.subscribe(params => {
@@ -28,6 +32,9 @@ export class AdminportalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataService.admingetNotices().subscribe(response => {
+      this.notices = response;
+    });
   }
 
   clickedApp: boolean;
@@ -38,6 +45,7 @@ export class AdminportalComponent implements OnInit {
   menu = [
     { name: 'Add Employee', key: 'addemployee' },
     { name: 'Get Employee Details', key: 'getemployeedetails' },
+    { name: 'Add a Notice', key: 'addanotice' },
     { name: 'View Projects', key: 'viewprojects' },
     { name: 'View Inquiries', key: 'viewinquiries' },
     { name: 'Leave-Project Manager', key: 'leave-projectmanager' },
@@ -163,6 +171,34 @@ export class AdminportalComponent implements OnInit {
       this.projectdetails = (response);
       //console.log(this.projectdetails);
     });
+  }
+
+  editNotice(notice) {
+    //this.dataService.editNotice(notice);
+    console.log(notice);
+  }
+
+  removeNotice(notice) {
+    //console.log(notice.title);
+    let response = this.dataService.adminremoveNotice(notice.id);
+    if (response) {
+      this.noticeSuccess = false;
+      this.notices.splice(this.notices.indexOf(notice), 1);
+      setTimeout(() => this.noticeSuccess = false, 3000);
+      this.subject = "";
+      this.issue = "";
+    }
+  }
+
+  addNotice(details) {
+    let response = this.dataService.adminaddNotice(details);
+    if (response) {
+      this.noticeSuccess = true;
+      this.notices.push(details);
+      setTimeout(() => this.noticeSuccess = false, 3000);
+      this.subject = "";
+      this.issue = "";
+    }
   }
 
 }
