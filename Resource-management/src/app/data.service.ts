@@ -232,4 +232,12 @@ export class DataService {
     });
   }
 
+  getProjectids(userid:number) {
+    let data = { userid: userid };
+    return this.http.post('http://localhost:3000/api/getprojectids', data)
+      .map(response => {
+        return (response.json().data);
+      });
+  }
+
 }

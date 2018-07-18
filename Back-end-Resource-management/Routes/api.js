@@ -927,4 +927,35 @@ api.post('/markassigned', (req, res) => {
     });
 });
 
+api.post('/getprojectids', (req, res) => {
+    var userid = req.body.userid;
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    //console.log(detailData);
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT id,projectname FROM projects WHERE assignedemployees LIKE "%?,%"', userid, function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        //console.log(rows);
+                        appData["data"] = rows;
+                        res.status(200).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                    }
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
 module.exports = api;

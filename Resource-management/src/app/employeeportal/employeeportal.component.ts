@@ -18,6 +18,7 @@ export class EmployeeportalComponent implements OnInit {
   leaveSuccess = false;
   reason: string;
   notices = [];
+  assignedProjects = [];
 
   constructor(private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -29,6 +30,10 @@ export class EmployeeportalComponent implements OnInit {
   }
 
   ngOnInit() {
+    let user= this.authService.currentUserId
+    this.dataService.getProjectids(user).subscribe(response => {
+      this.assignedProjects = response;
+    });
   }
 
   menu = [

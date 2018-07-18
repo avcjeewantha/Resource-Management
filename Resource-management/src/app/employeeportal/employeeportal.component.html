@@ -10,12 +10,19 @@
     </div>
     <div class="col">
 
-      <div *ngIf="category==='assignedprojects'" class="card">
+    <div *ngIf="category==='assignedprojects'" class="card">
         <div class="card-header">
           Assigned Projects
         </div>
         <div class="card-body">
-          projects
+          <div *ngFor="let project of assignedProjects" class="card">
+            <div class="card-body">
+              <p class="card-text">
+                <p>ID : {{project.id}}<br>
+          Project Name:{{project.projectname}}
+                </p>
+            </div>
+          </div>
         </div>
       </div>
 
