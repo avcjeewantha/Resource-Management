@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2018 at 10:29 PM
+-- Generation Time: Jul 18, 2018 at 02:40 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.1
 
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `nodejs` varchar(8) NOT NULL,
   `assignedprojects` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `employees`
@@ -81,8 +81,12 @@ INSERT INTO `employees` (`id`, `firstname`, `lastname`, `address`, `city`, `sdat
 (2, '', '', '', '', '', '', '', '', '', '', '', ''),
 (3, '', '', '', '', '', '', '', '', '', '', '', ''),
 (4, '', '', '', '', '', '', '', '', '', '', '', ''),
-(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', ''),
-(11, 'muditha', 'charani', 'ratanapura', 'weligama', '2018-07-03', '2018-07-11', '712245489', 'mudithaemployee@gmail.com', 'Yes', 'Yes', 'Yes', '');
+(10, 'kamal', 'saman', 'matara', 'weligama', '2018-07-10', '2018-07-11', '776261833', 'kamalemployee@gmail.com', 'Yes', 'No', 'Yes', ' 1, '),
+(11, 'muditha', 'charani', 'ratanapura', 'weligama', '2018-07-03', '2018-07-11', '712245489', 'mudithaemployee@gmail.com', 'Yes', 'Yes', 'Yes', '2, 4, '),
+(12, 'sahan', 'jeaa', 'asdr', 'cas', '2018-07-03', '2018-07-11', '778954622', 'sahanemployee@gmail.com', 'Yes', 'No', 'Yes', '1, 2, 2, 4, '),
+(13, 'avc', 'cbxbx', 'fgsggsd', 'sfsdfsdf', '2018-07-03', '2018-07-11', '776261899', 'avcemployee@gmail.com', 'Yes', 'Yes', 'No', ''),
+(14, 'perera', 'dcsdc', 'wedewd', 'wedwedew', '2018-07-03', '2018-07-11', '778956422', 'pereraemployee@gmail.com', 'Yes', 'Yes', 'Yes', '1, 1, '),
+(15, 'dasun', 'sdvsdv', 'sdsacd', 'sdavasdv', '2018-07-03', '2018-07-11', '778956244', 'dasunemployee@gmail.com', 'Yes', 'Yes', 'Yes', '');
 
 -- --------------------------------------------------------
 
@@ -182,7 +186,12 @@ CREATE TABLE IF NOT EXISTS `projects` (
 --
 
 INSERT INTO `projects` (`id`, `projectname`, `numofemployees`, `budget`, `sdate`, `edate`, `java`, `angular`, `nodejs`, `assignedemployees`, `assigned`) VALUES
-(1, 'test', 2, '1456', '2018-07-03', '2018-07-27', 'Yes', 'No', 'Yes', '', 'No');
+(1, 'test', 2, '1456', '2018-07-03', '2018-07-27', 'Yes', 'No', 'Yes', '10, 12, 14, 14, ', 'Yes'),
+(2, 'test', 10, '14582', '2018-07-10', '2018-07-27', 'Yes', 'No', 'Yes', '12, 11, 12, ', 'Yes'),
+(3, 'ghttt', 14, '14522', '2018-07-03', '2018-07-27', 'Yes', 'Yes', 'No', '', 'Yes'),
+(4, 'bjgghjjg', 2, '14582', '2018-07-10', '2018-07-27', 'No', 'Yes', 'Yes', '12, 11, ', 'Yes'),
+(5, 'sdcsdcdc', 3, '145585', '2018-07-10', '2018-07-27', 'Yes', 'No', 'Yes', '', 'Yes'),
+(6, 'test', 5, '45897', '2018-07-10', '2018-07-27', 'Yes', 'Yes', 'No', '', 'No');
 
 -- --------------------------------------------------------
 
@@ -266,7 +275,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(20) NOT NULL,
   `type` varchar(15) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `users`
@@ -278,7 +287,11 @@ INSERT INTO `users` (`id`, `firstname`, `lastname`, `address`, `email`, `passwor
 (3, 'Resource', 'Manager', '', 'resourcemanager@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'resourcemanager'),
 (4, '', '', '', '', '', ''),
 (10, 'kamal', 'saman', 'matara', 'kamalemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
-(11, 'muditha', 'charani', 'ratanapura', 'mudithaemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
+(11, 'muditha', 'charani', 'ratanapura', 'mudithaemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
+(12, 'sahan', 'jeaa', 'asdr', 'sahanemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
+(13, 'avc', 'cbxbx', 'fgsggsd', 'avcemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
+(14, 'perera', 'dcsdc', 'wedewd', 'pereraemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee'),
+(15, 'dasun', 'sdvsdv', 'sdsacd', 'dasunemployee@gmail.com', 'úƒþÿ²ÊB‡1T8}kx', 'employee');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

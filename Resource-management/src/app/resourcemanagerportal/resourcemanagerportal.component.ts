@@ -24,6 +24,16 @@ export class ResourcemanagerportalComponent implements OnInit {
   subject: string;
   issue: string;
   inquiry: string;
+  projects = [];
+  projectSuccess = false;
+  addedSuccess = false;
+  javapeople=[];
+  angularpeople=[];
+  nodejspeople=[];
+  javaactive:boolean;
+  angularactive:boolean;
+  nodejsactive:boolean;
+
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -35,11 +45,15 @@ export class ResourcemanagerportalComponent implements OnInit {
     this.dataService.rsmanagergetNotices().subscribe(response => {
       this.notices = response;
     });
+    this.dataService.getprojects().subscribe(response => {
+      this.projects = response;
+    });
   }
 
   clickedApp: boolean;
   leaveApplications: any;
   employeedetails: any;
+  projectID:any
 
   menu = [
     { name: 'Up Coming Projects', key: 'upcomingprojects' },
@@ -134,4 +148,64 @@ export class ResourcemanagerportalComponent implements OnInit {
       //console.log(this.employeedetails);
     });
   }
+
+  empjava(id:number) {
+    let pid=id;
+    this.projectID =pid;
+    //console.log(notice.title);
+    this.dataService.getjavapeople().subscribe((response) => {
+      this.javapeople = (response);
+      //console.log(this.javapeople);
+    });
+  }
+
+  empangular(id: number) {
+    let pid = id;
+    this.projectID = pid;
+    //console.log(notice.title);
+    this.dataService.getangularpeople().subscribe((response) => {
+      this.angularpeople = (response);
+      //console.log(this.employeedetails);
+    });
+  }
+
+  empnodejs(id: number) {
+    let pid = id;
+    this.projectID = pid;
+    //console.log(notice.title);
+    this.dataService.getnodejspeople().subscribe((response) => {
+      this.nodejspeople = (response);
+      //console.log(this.employeedetails);
+    });
+  }
+
+  clickassigned(project) {
+    //console.log(notice.title);
+    this.dataService.markassigned(project.id);
+    this.projectSuccess = true;
+    this.projects.splice(this.projects.indexOf(project), 1);
+    setTimeout(() => this.projectSuccess = false, 3000);
+    this.subject = "";
+    this.issue = "";
+  }
+
+  assignpeople(people ,projectid:number){
+    let response = this.dataService.assignpeople(people.id,projectid);
+    if (response) {
+      this.success = true;
+      setTimeout(() => this.projectSuccess = false, 3000);
+      this.subject = "";
+      this.inquiry = "";
+      if(this.javapeople.some(x=> x===people)){
+        this.javapeople.splice(this.javapeople.indexOf(people), 1);
+      }
+      if (this.angularpeople.some(x => x === people)) {
+        this.angularpeople.splice(this.angularpeople.indexOf(people), 1);
+      }
+      if (this.nodejspeople.some(x => x === people)) {
+        this.nodejspeople.splice(this.nodejspeople.indexOf(people), 1);
+      }
+    }
+  }
+
 }

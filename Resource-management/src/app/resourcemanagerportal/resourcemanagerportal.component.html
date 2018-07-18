@@ -15,7 +15,72 @@
           Up Coming Projects
         </div>
         <div class="card-body">
-          projects
+          <div *ngIf="projectSuccess" class="alert alert-success" role="alert">
+            The project has been assigned.
+          </div>
+          <div *ngFor="let project of projects" class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{project.id}}  {{project.projectname}}</h5>
+              <p class="card-text">No.of employees: {{project.numofemployees}}</p>
+              <p class="card-text">required skills: Java: {{project.java}}  Angular: {{project.angular}}  NodeJs: {{project.nodejs}}</p>
+            </div>
+            <div>
+              <button class="btn btn-lg btn-outline-primary float-right" (click)="open(content1)" (click)="javaactive='true'" (click)="angularactive='false'" (click)="nodejsactive='false'"  (click)="empjava(project.id)">Java</button>
+              <button class="btn btn-lg btn-outline-primary float-right" (click)="open(content2)" (click)="javaactive='false'" (click)="angularactive='true'" (click)="nodejsactive='false'"(click)="empangular(project.id)">Angular</button>
+              <button class="btn btn-lg btn-outline-primary float-right" (click)="open(content3)" (click)="javaactive='false'" (click)="angularactive='false'" (click)="nodejsactive='true'"(click)="empnodejs(project.id)">NodeJs</button>
+              <button class="btn btn-lg btn-outline-primary float-right" (click)="clickassigned(project)">Assign</button>
+            </div>
+          </div>
+<!--Editing area ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss-->
+          <div>
+            <ng-template #content1 let-c="close" let-d="dismiss">
+              <div *ngIf="javaactive">
+                <div *ngIf="addedSuccess" class="alert alert-success" role="alert">
+                  Successfully Added.
+                </div>
+                <ul *ngFor="let people of javapeople" class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{people.id}} {{people.firstname}} {{people.lastname}}</h5>
+                    <span class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary" (click)='assignpeople(people,projectID)'>Add</button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              </ng-template>
+              <ng-template #content2 let-c="close" let-d="dismiss">
+              <div *ngIf="angularactive">
+                <div *ngIf="addedSuccess" class="alert alert-success" role="alert">
+                   Successfully Added.
+                </div>
+                <ul *ngFor="let people of angularpeople" class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{people.id}} {{people.firstname}} {{people.lastname}}</h5>
+                    <span class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary" (click)='assignpeople(people,projectID)'>Add</button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+              </ng-template>
+              <ng-template #content3 let-c="close" let-d="dismiss">
+              <div *ngIf="nodejsactive">
+                <div *ngIf="addedSuccess" class="alert alert-success" role="alert">
+                   Successfully Added.
+                </div>
+                <ul *ngFor="let people of nodejspeople" class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <h5 class="card-title">{{people.id}} {{people.firstname}} {{people.lastname}}</h5>
+                    <span class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary" (click)='assignpeople(people,projectID)'>Add</button>
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </ng-template>
+          
+          </div>
+<!--Editing area ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss-->
         </div>
       </div>
 

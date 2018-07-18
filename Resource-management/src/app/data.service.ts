@@ -159,33 +159,77 @@ export class DataService {
     });
   }
 
-getLeaveApp_em() {
+  getLeaveApp_em() {
   return this.http.get("http://localhost:3000/api/getLeaveApplications_em").map(response => {
     //console.log(response.json().data);
     return (response.json().data);
   });
-}
-setLeave_em(leaveid: number, decision: string) {
+  }
+  setLeave_em(leaveid: number, decision: string) {
   let data = { leaveid: leaveid, result: decision };
   //console.log(data);
   return this.http.post("http://localhost:3000/api/confirmLeave_em", data).subscribe(response => {
     return response.json();
   });
-}
-deleteLeaveAppliccation_em(id: number) {
+  } 
+  deleteLeaveAppliccation_em(id: number) {
   let leaveId = { 'id': id };
    //console.log(leaveId);
    this.http.delete("http://localhost:3000/api/deleteLeaveApplication_em" + leaveId).map(response => {
     //console.log(response.json().data);
     return (response.json().data);
   });
- }
+  }
 
   getdetails(detailId) {
     return this.http.post('http://localhost:3000/api/getdetails', detailId)
       .map(response => {
         return(response.json().data);      
       });
+  }
+
+  getjavapeople() {
+    return this.http.get("http://localhost:3000/api/getjavapeople").map(response => {
+      //console.log(response.json().data);
+      return (response.json().data);
+    });
+  }
+
+  getangularpeople() {
+    return this.http.get("http://localhost:3000/api/getangularpeople").map(response => {
+      //console.log(response.json().data);
+      return (response.json().data);
+    });
+  }
+
+  getnodejspeople() {
+    return this.http.get("http://localhost:3000/api/getnodejspeople").map(response => {
+      //console.log(response.json().data);
+      return (response.json().data);
+    });
+  }
+
+  assignpeople(peopleid: number, projectid: number) {
+    let data = { peopleid: peopleid, projectid: projectid };
+    //console.log(data);
+    return this.http.post("http://localhost:3000/api/assignpeople", data).subscribe(response => {
+      return response.json();
+    });
+  }
+
+  getprojects() {
+    return this.http.get("http://localhost:3000/api/getprojects").map(response => {
+      //console.log(response.json().data);
+      return response.json().data;
+    });
+  }
+
+  markassigned(projectID: number) {
+    let data = {result: projectID};
+    //console.log(data);
+    return this.http.post("http://localhost:3000/api/markassigned", data).subscribe(response => {
+      return response.json();
+    });
   }
 
 }

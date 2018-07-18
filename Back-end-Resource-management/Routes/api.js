@@ -758,4 +758,173 @@ api.post('/getdetails', (req, res) => {
     });
 });
 
+api.get('/getprojects', (req, res) => {
+    var appData = { data: [] };
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push("Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM projects WHERE assigned = "No"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getjavapeople', (req, res) => {
+    var appData = { data: [] };
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push("Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM employees WHERE java = "Yes"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    //console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getangularpeople', (req, res) => {
+    var appData = { data: [] };
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push("Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM employees WHERE angular = "Yes"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    //console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.get('/getnodejspeople', (req, res) => {
+    var appData = { data: [] };
+    database.connection.getConnection(function (err, connection) {
+
+        if (err) {
+            appData["error"] = 1;
+            appData["data"].push("Internal Server Error");
+            res.status(500).json(appData);
+        } else {
+            connection.query('SELECT * FROM employees WHERE nodejs = "Yes"', function (err, rows, fields) {
+                if (!err) {
+                    appData["error"] = 0;
+                    rows.forEach(row => {
+                        appData['data'].push(row);
+                    });
+                    //console.log(appData);
+                    res.status(200).json(appData);
+                } else {
+                    appData["data"] = "No data found";
+                    res.status(204).json(appData);
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.post('/assignpeople', (req, res) => {
+    var peopleid = req.body.peopleid;
+    var projectid = req.body.projectid;
+    var assignData = { peopleid: peopleid, projectid: projectid };
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('UPDATE projects SET assignedemployees=(SELECT CONCAT(assignedemployees,?,", ") FROM ((SELECT id FROM projects WHERE id=?) AS x)) WHERE id=?; UPDATE employees SET assignedprojects=(SELECT CONCAT(assignedprojects,"?",", ") FROM ((SELECT id FROM employees WHERE id=?) AS y)) WHERE id=?', [assignData.peopleid, assignData.projectid, assignData.projectid, assignData.projectid, assignData.peopleid, assignData.peopleid], function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        appData["data"] = "data entered successfully!";
+                        res.status(201).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                        //console.log(err);
+                    }
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
+api.post('/markassigned', (req, res) => {
+    var pid = req.body.result;
+    var appData = {
+        "error": 1,
+        "data": ""
+    };
+    database.connection.getConnection(function (err, connection) {
+        if (err) {
+            appData["error"] = 1;
+            appData["data"] = "Internal Server Error";
+            res.status(500).json(appData);
+        } else {
+            connection.query('UPDATE projects SET assigned="Yes" WHERE id=?',pid, function (err, rows, fields) {
+                {
+                    if (!err) {
+                        appData.error = 0;
+                        appData["data"] = "data entered successfully!";
+                        res.status(201).json(appData);
+                    } else {
+                        appData["data"] = err;
+                        res.status(400).json(appData);
+                        //console.log(err);
+                    }
+                }
+            });
+            connection.release();
+        }
+    });
+});
+
 module.exports = api;
