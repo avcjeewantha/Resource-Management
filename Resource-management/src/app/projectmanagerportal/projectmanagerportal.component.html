@@ -180,7 +180,74 @@
           Selected Employees
         </div>
         <div class="card-body">
-          selected
+          <div class="col-lg-12 well">
+            <div class="row">
+              <form #fm="ngForm" (ngSubmit)="getprojectdetails(fm.value)">
+                <div class="col-sm-12">
+        
+                  <div class="form-group">
+                    <label>Project ID</label>
+                    <input required minlength="1" pattern="[0-9]{0,5}" ngModel name='detailId' #detailId="ngModel" type="number" placeholder="Enter ID Here.."
+                      class="form-control">
+                    <div *ngIf="detailId.touched && !detailId.valid">
+                      <div class="alert alert-danger" *ngIf="detailId.errors.required">
+                        ID is required
+                      </div>
+                      <div class="alert alert-danger" *ngIf="detailId.errors.pattern">
+                        ID is invalid
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" (click)="clickedApp='true'" [disabled]="!fm.valid">Search</button>
+        
+                </div>
+        
+                <p>
+                  <!--{{ fm.value | json }}-->
+                </p>
+        
+              </form>
+            </div>
+          </div>
+        
+          <div *ngIf="clickedApp">
+            <span role="group" aria-label="Basic example">
+              <ng-template #content5 let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">Project Details</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="clickedApp='false'" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="container">
+        
+                  <div class="panel-group">
+        
+                    <div class=" panel panel-default">
+                      <div class="panel-heading panel-success">
+                        <b> Project ID</b>
+                      </div>
+                      <div class="panel-body">{{projectdetails.id}} </div>
+                    </div>
+
+                    <div class=" panel panel-default">
+                      <div class="panel-heading panel-success">
+                        <b> Selected employee IDs</b>
+                      </div>
+                      <div class="panel-body">{{projectdetails.assignedemployees}} </div>
+                    </div>
+        
+                  </div>
+        
+                </div>
+              </ng-template>
+              <div *ngIf="projectdetails">
+                <button class="btn btn-lg btn-outline-primary" (click)="open(content5)" [disabled]="!fm.valid">view</button>
+              </div>
+              <hr>
+            </span>
+          </div>
+        
         </div>
       </div>
 
@@ -256,7 +323,7 @@
             <div class="row">
               <form #fm="ngForm" (ngSubmit)="getdetails(fm.value)">
                 <div class="col-sm-12">
-      
+
                   <div class="form-group">
                     <label>ID</label>
                     <input required minlength="2" pattern="[0-9]{2,5}" ngModel name='detailId' #detailId="ngModel" type="number" placeholder="Enter ID Here.."
@@ -271,17 +338,17 @@
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary" (click)="clickedApp='true'" [disabled]="!fm.valid">Search</button>
-      
+
                 </div>
-      
+
                 <p>
                   <!--{{ fm.value | json }}-->
                 </p>
-      
+
               </form>
             </div>
           </div>
-      
+
           <div *ngIf="clickedApp">
             <span role="group" aria-label="Basic example">
               <ng-template #content let-c="close" let-d="dismiss">
@@ -292,53 +359,53 @@
                   </button>
                 </div>
                 <div class="container">
-      
+
                   <div class="panel-group">
-      
+
                     <div class=" panel panel-default">
                       <div class="panel-heading panel-success">
                         <b> Name</b>
                       </div>
                       <div class="panel-body">{{employeedetails.firstname}} {{employeedetails.lastname}}</div>
                     </div>
-      
+
                     <div class="panel panel-default">
                       <div class="panel-heading panel-success">
                         <b>Residence</b>
                       </div>
                       <div class="panel-body">Address :{{employeedetails.reason}} City: {{employeedetails.city}}</div>
                     </div>
-      
+
                     <div class="panel panel-default">
                       <div class="panel-heading panel-success">
                         <b>Start Date</b>
                       </div>
                       <div class="panel-body">{{employeedetails.startdate}} </div>
                     </div>
-      
+
                     <div class="panel panel-default">
                       <div class="panel-heading panel-success">
                         <b>Birthday</b>
                       </div>
                       <div class="panel-body">{{employeedetails.birthday}} </div>
                     </div>
-      
+
                     <div class="panel panel-default">
                       <div class="panel-heading panel-success">
                         <b>Contacts</b>
                       </div>
                       <div class="panel-body">Tel:{{employeedetails.phnnum}} Email: {{employeedetails.email}} </div>
                     </div>
-      
+
                     <div class="panel panel-default">
                       <div class="panel-heading panel-success">
                         <b>Skills</b>
                       </div>
                       <div class="panel-body">Java :{{employeedetails.java}} Angular: {{employeedetails.angular}} NodeJs: {{employeedetails.nodejs}}</div>
                     </div>
-      
+
                   </div>
-      
+
                 </div>
               </ng-template>
               <div *ngIf="employeedetails">
@@ -347,7 +414,7 @@
               <hr>
             </span>
           </div>
-      
+
         </div>
       </div>
 
@@ -359,7 +426,7 @@
           <div *ngIf="noticeSuccess" class="alert alert-success" role="alert">
             Your notice has been submitted.
           </div>
- 
+
           <div *ngFor="let notice of notices" class="card">
             <div class="card-body">
               <h5 class="card-title">{{notice.title}}</h5>
@@ -384,7 +451,7 @@
                 <form #n="ngForm">
                   <div class="form-group">
                     <label for="title">Title</label>
-                    <input  ngModel type="text" name="title" class="form-control" id="title" placeholder="Enter the Title">    
+                    <input ngModel type="text" name="title" class="form-control" id="title" placeholder="Enter the Title">
                   </div>
                   <div class="form-group">
                     <label for="description">Description</label>

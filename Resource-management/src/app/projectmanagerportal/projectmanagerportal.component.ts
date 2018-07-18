@@ -25,6 +25,7 @@ export class ProjectmanagerportalComponent implements OnInit {
   issue: string;
   inquiry: string;
   viewinquiries = [];
+  projectdetails =[];
 
   constructor(private modalService: NgbModal, private route: ActivatedRoute, private dateparser: NgbDateParserFormatter, private authService: AuthService, private dataService: DataService) {
     route.queryParamMap.subscribe(params => {
@@ -44,7 +45,7 @@ export class ProjectmanagerportalComponent implements OnInit {
   clickedApp: boolean;
   leaveApplications: any;
   employeedetails: any;
-
+ 
   menu = [
     { name: 'Up Coming Projects', key: 'upcomingprojects' },
     { name: 'Selected Employees', key: 'selectedemployees' },
@@ -171,6 +172,15 @@ export class ProjectmanagerportalComponent implements OnInit {
     this.dataService.getdetails(id).subscribe((response) => {
       this.employeedetails = (response);
       //console.log(this.employeedetails);
+    });
+  }
+
+  getprojectdetails(detailId) {
+    //console.log(detailId);
+    let id = detailId;
+    this.dataService.getprojectdetails(id).subscribe((response) => {
+      this.projectdetails = (response);
+      //console.log(this.projectdetails);
     });
   }
 
