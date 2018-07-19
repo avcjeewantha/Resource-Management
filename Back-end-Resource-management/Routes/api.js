@@ -654,7 +654,7 @@ api.get('/getLeaveApplications_pm',  (req, res) => {
             appData["data"].push( "Internal Server Error");
             res.status(500).json(appData);
         } else {
-            connection.query('SELECT * FROM projectmanagerleaves WHERE leaveStatus = "No"', function (err, rows, fields) {
+            connection.query('SELECT * FROM projectmanagerleaves WHERE leaveStatus = ""', function (err, rows, fields) {
                 if (!err) {
                     appData["error"] = 0;
                     rows.forEach(row => {
@@ -711,7 +711,7 @@ api.get('/getLeaveApplications_rm', (req, res) => {
             appData["data"].push("Internal Server Error");
             res.status(500).json(appData);
         } else {
-            connection.query('SELECT * FROM resourcemanagerleaves WHERE leaveStatus = "No"', function (err, rows, fields) {
+            connection.query('SELECT * FROM resourcemanagerleaves WHERE leaveStatus = ""', function (err, rows, fields) {
                 if (!err) {
                     appData["error"] = 0;
                     rows.forEach(row => {
@@ -768,7 +768,7 @@ api.get('/getLeaveApplications_em', (req, res) => {
             appData["data"].push("Internal Server Error");
             res.status(500).json(appData);
         } else {
-            connection.query('SELECT * FROM employeeleaves WHERE leaveStatus = "No"', function (err, rows, fields) {
+            connection.query('SELECT * FROM employeeleaves WHERE leaveStatus = ""', function (err, rows, fields) {
                 if (!err) {
                     appData["error"] = 0;
                     rows.forEach(row => {
